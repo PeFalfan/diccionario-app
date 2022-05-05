@@ -1,0 +1,7 @@
+{
+  "name": "diccionario-app",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
