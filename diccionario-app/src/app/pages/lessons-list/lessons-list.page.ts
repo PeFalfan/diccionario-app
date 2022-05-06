@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { NavigationExtras, Router } from '@angular/router';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-lessons-list',
@@ -7,9 +9,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LessonsListPage implements OnInit {
 
-  constructor() { }
+
+
+  constructor(private router: Router, public navController: NavController) { }
 
   ngOnInit() {
+  }
+
+  cargarLeccion(id) {
+    this.navController.navigateRoot('lesson-detail')
+
   }
 
 }

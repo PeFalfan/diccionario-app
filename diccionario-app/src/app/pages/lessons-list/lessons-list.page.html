@@ -1,9 +1,71 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>lessons-list</ion-title>
+    <ion-item class="arena">
+      <ion-buttons slot="start">
+        <ion-back-button defaultHref="/"></ion-back-button>
+      </ion-buttons>
+      <ion-title class="ion-text-center">Lecciones Disponibles</ion-title>
+      <ion-img style="width: 30px; height: 30px;" slot="end" src="./assets/images/moai.png"></ion-img>
+    </ion-item>
   </ion-toolbar>
+  <ion-item class="arena">
+    <ion-title class="ion-text-center">Seleccione su lección</ion-title>
+  </ion-item>
 </ion-header>
 
-<ion-content>
 
+<ion-content>
+  <br>
+  <ion-list>
+    <ion-item class="lesson_question">
+      <ion-avatar slot="start">
+        <img src="../../../assets/images/lesson.png" />
+      </ion-avatar>
+      <ion-label (click)="cargarLeccion()" id="leccion1" value="1">
+        <h2>Lección 1</h2>
+        <h3>Porcentaje de Avance</h3>
+        <p>Temario</p>
+      </ion-label>
+    </ion-item>
+    <ion-item class="lesson_question">
+      <ion-avatar slot="start">
+        <img src="../../../assets/images/lesson.png" />
+      </ion-avatar>
+      <ion-label (click)="cargarLeccion()">
+        <h2>Lección 2</h2>
+        <h3>Porcentaje de Avance</h3>
+        <p>Temario</p>
+      </ion-label>
+    </ion-item>
+    <ion-item class="lesson_question">
+      <ion-avatar slot="start">
+        <img src="../../../assets/images/lesson.png" />
+      </ion-avatar>
+      <ion-label (click)="cargarLeccion()">
+        <h2>Lección 3</h2>
+        <h3>Porcentaje de Avance</h3>
+        <p>Temario</p>
+      </ion-label>
+    </ion-item>
+    <ion-item class="lesson_question">
+      <ion-avatar slot="start">
+        <img src="../../../assets/images/lesson.png" />
+      </ion-avatar>
+      <ion-label (click)="cargarLeccion()">
+        <h2>Lección 4</h2>
+        <h3>Porcentaje de Avance</h3>
+        <p>Temario</p>
+      </ion-label>
+    </ion-item>
+    <ion-item class="lesson_question">
+      <ion-avatar slot="start">
+        <img src="../../../assets/images/lesson.png" />
+      </ion-avatar>
+      <ion-label (click)="cargarLeccion()">
+        <h2>Lección 5</h2>
+        <h3>Porcentaje de Avance</h3>
+        <p>Temario</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
 </ion-content>
