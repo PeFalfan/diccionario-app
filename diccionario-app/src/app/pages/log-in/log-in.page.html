@@ -28,10 +28,11 @@
       <ion-label position="floating">Contraseña *</ion-label>
       <ion-input type="password" [(ngModel)]="clientPasswordLogin" ></ion-input>
     </ion-item>
-  
-    <ion-button [routerLink]="['/home']" class="ion-marging-top" class="arena" expand="block" (click)="loginFunction()" type="submit">Ingresar</ion-button>
-    <br>
-    <ion-router-link class="color">Recuperar contraseña</ion-router-link>
+    <ion-item >
+    <ion-button  class="ion-marging-top" class="arena" expand="block" (click)="validarLogin()" type="submit">Ingresar</ion-button>
+    <ion-button [routerLink]="['/log-in']" class="ion-marging-top" class="arena" expand="block" type="submit">cancelar</ion-button>    <br>
+  </ion-item>
+    <ion-router-link class="color" class="ion-text-center">Recuperar contraseña</ion-router-link>
   
   
 </ion-content>
