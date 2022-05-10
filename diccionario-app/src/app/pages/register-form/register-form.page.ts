@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { NavController } from '@ionic/angular';
+
+import { IUsuario } from 'src/app/interfaces/incripcion-interfaces';
+import { UsuarioService } from 'src/app/services/usuario/usuario.service';
 
 @Component({
   selector: 'app-register-form',
@@ -6,7 +10,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./register-form.page.scss'],
 })
 export class RegisterFormPage implements OnInit {
-clientRut: string= "";
+
 clientName: string= "";
 clientLastNames: string= "";
 clientPhone: string= "";
@@ -14,7 +18,9 @@ clientEmail: string="";
 clientPassword: string= "";
 clientRepeatPassword: string= "";
 
-  constructor() { }
+usuario: IUsuario;
+
+  constructor(public navctrl: NavController, private servicioUsuario: UsuarioService) { }
 
   ngOnInit() {
   }
@@ -35,13 +41,20 @@ clientRepeatPassword: string= "";
     var nombre = this.clientName
     var apellido= this. clientLastNames
     var fono= this.clientPhone
-    var rut= this.clientRut
     var correo= this.clientEmail
     var contrasena= this.clientPassword
     var contrasena2= this.clientRepeatPassword
+
+    //objeto
+    this.usuario.clientEmail= correo 
+    this.usuario.clientLastNames= apellido
+    this.usuario.clientName= nombre
+    this.usuario.clientPassword= contrasena
+    this.usuario.clientPhone= fono
+    
     if(
-      nombre != "" && apellido != "" && fono !="" && rut != ""
-      && correo != ""&& contrasena != "" && contrasena2 != ""
+      nombre != "" && apellido != "" && fono !=""
+      && correo != "" && contrasena != "" && contrasena2 != ""
     ){
       console.log("campos ok")
     }else{
@@ -58,19 +71,12 @@ clientRepeatPassword: string= "";
       console.log("fono no ok")
     }
   }
-  validarRut(){
-    var rut= this.clientRut
-    if(rut.length >= 9 && rut.length <= 10){
-      console.log("rut ok")
-    }else{
-      console.log("rut no ok")
-    }
-  }
+  
 
 validarContrasena(){
   var contrasena= this.clientPassword
   console.log("texto"+contrasena)
-  var regex = /^(?=.[A-Za-z])(?=.\d)(?=.[@$!%#?&]){8,}$/
+  var regex = /^(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/
   if (regex.test(contrasena)) {
         console.log("contraseña ok")
       }
@@ -89,4 +95,16 @@ validarContrasena(){
      console.log("contrasena distintas")
    }
  }
+
+ validarRegistro(){
+  this.servicioUsuario.createUsuario(this.usuario).subscribe(resp => {
+    if (Number (resp.data)== 1){
+      this.navctrl.navigateRoot("log-in")
+    }else{
+      console.log("registro no ok")
+    }
+  } )
+ }
+ 
+
 }

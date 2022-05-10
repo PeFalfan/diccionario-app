@@ -14,10 +14,6 @@
 </ion-header>
 
 <ion-content>
-  <ion-item class="ion-marging-top">
-    <ion-label position="floating">RUT*</ion-label>
-    <ion-input [(ngModel)]="clientRut" placeholder="11111111-0"></ion-input>
-  </ion-item>
 
   <ion-item class="ion-marging-top">
     <ion-label position="floating">Nombre *</ion-label>
@@ -50,6 +46,6 @@
     <ion-input [(ngModel)]="clientRepeatPassword"></ion-input>
   </ion-item>
 
-  <ion-button class="arena" expand="block" (click)="validarCorreo(); validarCampos(); validarFono(); validarRut(); validarContrasena2();validarContrasena()"  type="submit">Registrar</ion-button>
+  <ion-button class="arena" expand="block" (click)="validarCorreo(); validarCampos(); validarFono(); validarContrasena2();validarContrasena()"  type="submit">Registrar</ion-button>
   
 </ion-content>

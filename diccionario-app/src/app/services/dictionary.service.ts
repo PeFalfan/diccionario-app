@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { IDictionaryResponseModel, IResponseModel } from '../models/responseModel';
+//import { IDictionaryResponseModel, IResponseModel } from '../models/responseModel';
 
 @Injectable({
   providedIn: 'root'
@@ -13,9 +13,9 @@ export class DictionaryService {
 
   constructor(private http:HttpClient) { }
 
-  loadDictionary():Observable<IDictionaryResponseModel>{
+  /*loadDictionary():Observable<IDictionaryResponseModel>{
     let urlToHit = this.url + "/getDictionary";
     console.log(urlToHit)
     return this.http.get<IDictionaryResponseModel>(urlToHit);
-  }
+  }*/
 }
