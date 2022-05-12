@@ -2,6 +2,7 @@ import { Component, ComponentFactoryResolver, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { ILogin } from 'src/app/interfaces/login-interfaces';
 import {UsuarioService} from '../../services/usuario/usuario.service';
+
 @Component({
   selector: 'app-log-in',
   templateUrl: './log-in.page.html',
