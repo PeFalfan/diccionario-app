@@ -4,316 +4,46 @@
       <ion-buttons slot="start">
         <ion-back-button defaultHref="/lessons-list"></ion-back-button>
       </ion-buttons>
-      <ion-title class="ion-text-center">Lección</ion-title>
+      <ion-title class="ion-text-center">{{leccion.tituloLeccion}}</ion-title>
       <ion-img style="width: 30px; height: 30px;" slot="end" src="./assets/images/moai.png"></ion-img>
     </ion-item>
   </ion-toolbar>
 </ion-header>
 <ion-content>
-  <ion-item>
-    <h1>Pregunta 1</h1>
-    <ion-avatar style="margin-left:50%;">
-      <img src="../../../assets/images/mensaje.png" />
-    </ion-avatar>
-  </ion-item>
   <ion-list>
-    <ion-radio-group>
-      <ion-item>
-        <ion-label>Alternativa 1</ion-label>
-        <ion-radio color="success" slot="start" value="1"></ion-radio>
-      </ion-item>
+    <ion-item *ngFor="let pregunta of preguntas">
+      <ion-col>
+        <ion-col size="12">
+          <h4>{{pregunta.textoPregunta}}</h4>
+        </ion-col>
+        <ion-col>
+          <ion-radio-group>
+            <ion-item>
+              <ion-label>{{pregunta.palabraDiccionario}}
+              </ion-label>
+              <ion-radio color="success" slot="start" value="1"></ion-radio>
+            </ion-item>
 
-      <ion-item>
-        <ion-label>Alternativa 2</ion-label>
-        <ion-radio color="success" slot="start" value="2"></ion-radio>
-      </ion-item>
+            <ion-item>
+              <ion-label>Alternativa 2</ion-label>
+              <ion-radio color="success" slot="start" value="2"></ion-radio>
+            </ion-item>
 
-      <ion-item>
-        <ion-label>Alternativa 3</ion-label>
-        <ion-radio color="success" slot="start" value="3"></ion-radio>
-      </ion-item>
+            <ion-item>
+              <ion-label>Alternativa 3</ion-label>
+              <ion-radio color="success" slot="start" value="3"></ion-radio>
+            </ion-item>
 
-      <ion-item>
-        <ion-label>Alternativa 4</ion-label>
-        <ion-radio color="success" slot="start" value="4"></ion-radio>
-      </ion-item>
-    </ion-radio-group>
+            <ion-item>
+              <ion-label>Alternativa 4</ion-label>
+              <ion-radio color="success" slot="start" value="4"></ion-radio>
+            </ion-item>
+          </ion-radio-group>
+        </ion-col>
+      </ion-col>
+    </ion-item>
   </ion-list>
-
-  <ion-item class="lesson_question">
-    <h1>Pregunta 2</h1>
-    <ion-avatar style="margin-left:50%;">
-      <img src="../../../assets/images/mensaje.png" />
-    </ion-avatar>
-  </ion-item>
-  <ion-list>
-    <ion-radio-group>
-      <ion-item>
-        <ion-label>Alternativa 1</ion-label>
-        <ion-radio color="success" slot="start" value="1"></ion-radio>
-      </ion-item>
-
-      <ion-item>
-        <ion-label>Alternativa 2</ion-label>
-        <ion-radio color="success" slot="start" value="2"></ion-radio>
-      </ion-item>
-
-      <ion-item>
-        <ion-label>Alternativa 3</ion-label>
-        <ion-radio color="success" slot="start" value="3"></ion-radio>
-      </ion-item>
-
-      <ion-item>
-        <ion-label>Alternativa 4</ion-label>
-        <ion-radio color="success" slot="start" value="4"></ion-radio>
-      </ion-item>
-    </ion-radio-group>
-  </ion-list>
-
-  <ion-item class="lesson_question">
-    <h1>Pregunta 3</h1>
-    <ion-avatar style="margin-left:50%;">
-      <img src="../../../assets/images/mensaje.png" />
-    </ion-avatar>
-  </ion-item>
-  <ion-list>
-    <ion-radio-group>
-      <ion-item>
-        <ion-label>Alternativa 1</ion-label>
-        <ion-radio color="success" slot="start" value="1"></ion-radio>
-      </ion-item>
-
-      <ion-item>
-        <ion-label>Alternativa 2</ion-label>
-        <ion-radio color="success" slot="start" value="2"></ion-radio>
-      </ion-item>
-
-      <ion-item>
-        <ion-label>Alternativa 3</ion-label>
-        <ion-radio color="success" slot="start" value="3"></ion-radio>
-      </ion-item>
-
-      <ion-item>
-        <ion-label>Alternativa 4</ion-label>
-        <ion-radio color="success" slot="start" value="4"></ion-radio>
-      </ion-item>
-    </ion-radio-group>
-  </ion-list>
-
-
-  <ion-item class="lesson_question">
-    <h1>Pregunta 4</h1>
-    <ion-avatar style="margin-left:50%;">
-      <img src="../../../assets/images/mensaje.png" />
-    </ion-avatar>
-  </ion-item>
-  <ion-list>
-    <ion-radio-group>
-      <ion-item>
-        <ion-label>Alternativa 1</ion-label>
-        <ion-radio color="success" slot="start" value="1"></ion-radio>
-      </ion-item>
-
-      <ion-item>
-        <ion-label>Alternativa 2</ion-label>
-        <ion-radio color="success" slot="start" value="2"></ion-radio>
-      </ion-item>
-
-      <ion-item>
-        <ion-label>Alternativa 3</ion-label>
-        <ion-radio color="success" slot="start" value="3"></ion-radio>
-      </ion-item>
-
-      <ion-item>
-        <ion-label>Alternativa 4</ion-label>
-        <ion-radio color="success" slot="start" value="4"></ion-radio>
-      </ion-item>
-    </ion-radio-group>
-  </ion-list>
-
-
-  <ion-item class="lesson_question">
-    <h1>Pregunta 5</h1>
-    <ion-avatar style="margin-left:50%;">
-      <img src="../../../assets/images/mensaje.png" />
-    </ion-avatar>
-  </ion-item>
-  <ion-list>
-    <ion-radio-group>
-      <ion-item>
-        <ion-label>Alternativa 1</ion-label>
-        <ion-radio color="success" slot="start" value="1"></ion-radio>
-      </ion-item>
-
-      <ion-item>
-        <ion-label>Alternativa 2</ion-label>
-        <ion-radio color="success" slot="start" value="2"></ion-radio>
-      </ion-item>
-
-      <ion-item>
-        <ion-label>Alternativa 3</ion-label>
-        <ion-radio color="success" slot="start" value="3"></ion-radio>
-      </ion-item>
-
-      <ion-item>
-        <ion-label>Alternativa 4</ion-label>
-        <ion-radio color="success" slot="start" value="4"></ion-radio>
-      </ion-item>
-    </ion-radio-group>
-  </ion-list>
-
-
-  <ion-item class="lesson_question">
-    <h1>Pregunta 6</h1>
-    <ion-avatar style="margin-left:50%;">
-      <img src="../../../assets/images/mensaje.png" />
-    </ion-avatar>
-  </ion-item>
-  <ion-list>
-    <ion-radio-group>
-      <ion-item>
-        <ion-label>Alternativa 1</ion-label>
-        <ion-radio color="success" slot="start" value="1"></ion-radio>
-      </ion-item>
-
-      <ion-item>
-        <ion-label>Alternativa 2</ion-label>
-        <ion-radio color="success" slot="start" value="2"></ion-radio>
-      </ion-item>
-
-      <ion-item>
-        <ion-label>Alternativa 3</ion-label>
-        <ion-radio color="success" slot="start" value="3"></ion-radio>
-      </ion-item>
-
-      <ion-item>
-        <ion-label>Alternativa 4</ion-label>
-        <ion-radio color="success" slot="start" value="4"></ion-radio>
-      </ion-item>
-    </ion-radio-group>
-  </ion-list>
-
-  <ion-item class="lesson_question">
-    <h1>Pregunta 7</h1>
-    <ion-avatar style="margin-left:50%;">
-      <img src="../../../assets/images/mensaje.png" />
-    </ion-avatar>
-  </ion-item>
-  <ion-list>
-    <ion-radio-group>
-      <ion-item>
-        <ion-label>Alternativa 1</ion-label>
-        <ion-radio color="success" slot="start" value="1"></ion-radio>
-      </ion-item>
-
-      <ion-item>
-        <ion-label>Alternativa 2</ion-label>
-        <ion-radio color="success" slot="start" value="2"></ion-radio>
-      </ion-item>
-
-      <ion-item>
-        <ion-label>Alternativa 3</ion-label>
-        <ion-radio color="success" slot="start" value="3"></ion-radio>
-      </ion-item>
-
-      <ion-item>
-        <ion-label>Alternativa 4</ion-label>
-        <ion-radio color="success" slot="start" value="4"></ion-radio>
-      </ion-item>
-    </ion-radio-group>
-  </ion-list>
-
-  <ion-item class="lesson_question">
-    <h1>Pregunta 8</h1>
-    <ion-avatar style="margin-left:50%;">
-      <img src="../../../assets/images/mensaje.png" />
-    </ion-avatar>
-  </ion-item>
-  <ion-list>
-    <ion-radio-group>
-      <ion-item>
-        <ion-label>Alternativa 1</ion-label>
-        <ion-radio color="success" slot="start" value="1"></ion-radio>
-      </ion-item>
-
-      <ion-item>
-        <ion-label>Alternativa 2</ion-label>
-        <ion-radio color="success" slot="start" value="2"></ion-radio>
-      </ion-item>
-
-      <ion-item>
-        <ion-label>Alternativa 3</ion-label>
-        <ion-radio color="success" slot="start" value="3"></ion-radio>
-      </ion-item>
-
-      <ion-item>
-        <ion-label>Alternativa 4</ion-label>
-        <ion-radio color="success" slot="start" value="4"></ion-radio>
-      </ion-item>
-    </ion-radio-group>
-  </ion-list>
-
-  <ion-item class="lesson_question">
-    <h1>Pregunta 9</h1>
-    <ion-avatar style="margin-left:50%;">
-      <img src="../../../assets/images/mensaje.png" />
-    </ion-avatar>
-  </ion-item>
-  <ion-list>
-    <ion-radio-group>
-      <ion-item>
-        <ion-label>Alternativa 1</ion-label>
-        <ion-radio color="success" slot="start" value="1"></ion-radio>
-      </ion-item>
-
-      <ion-item>
-        <ion-label>Alternativa 2</ion-label>
-        <ion-radio color="success" slot="start" value="2"></ion-radio>
-      </ion-item>
-
-      <ion-item>
-        <ion-label>Alternativa 3</ion-label>
-        <ion-radio color="success" slot="start" value="3"></ion-radio>
-      </ion-item>
-
-      <ion-item>
-        <ion-label>Alternativa 4</ion-label>
-        <ion-radio color="success" slot="start" value="4"></ion-radio>
-      </ion-item>
-    </ion-radio-group>
-  </ion-list>
-
-  <ion-item class="lesson_question">
-    <h1 style="width:170px;">Pregunta 10</h1>
-    <ion-avatar style="margin-left:37.5%;">
-      <img src="../../../assets/images/mensaje.png" />
-    </ion-avatar>
-  </ion-item>
-  <ion-list>
-    <ion-radio-group>
-      <ion-item>
-        <ion-label>Alternativa 1</ion-label>
-        <ion-radio color="success" slot="start" value="1"></ion-radio>
-      </ion-item>
-
-      <ion-item>
-        <ion-label>Alternativa 2</ion-label>
-        <ion-radio color="success" slot="start" value="2"></ion-radio>
-      </ion-item>
-
-      <ion-item>
-        <ion-label>Alternativa 3</ion-label>
-        <ion-radio color="success" slot="start" value="3"></ion-radio>
-      </ion-item>
-
-      <ion-item>
-        <ion-label>Alternativa 4</ion-label>
-        <ion-radio color="success" slot="start" value="4"></ion-radio>
-      </ion-item>
-    </ion-radio-group>
-  </ion-list>
-
+  <ion-button expand="block" style="margin-top:10%;" (click)="AlertaComentario()">Enviar Comentario</ion-button>
   <ion-button class="lesson_button" (click)="AlertaCancelar()">Cancelar</ion-button>
   <ion-button class="lesson_button" (click)="AlertaLeccion()">Enviar</ion-button>
-
 </ion-content>

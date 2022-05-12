@@ -17,52 +17,12 @@
 <ion-content>
   <br>
   <ion-list>
-    <ion-item class="lesson_question">
+    <ion-item class="lesson_question" *ngFor="let leccion of lecciones">
       <ion-avatar slot="start">
         <img src="../../../assets/images/lesson.png" />
       </ion-avatar>
-      <ion-label (click)="cargarLeccion()" id="leccion1" value="1">
-        <h2>Lección 1</h2>
-        <h3>Porcentaje de Avance</h3>
-        <p>Temario</p>
-      </ion-label>
-    </ion-item>
-    <ion-item class="lesson_question">
-      <ion-avatar slot="start">
-        <img src="../../../assets/images/lesson.png" />
-      </ion-avatar>
-      <ion-label (click)="cargarLeccion()">
-        <h2>Lección 2</h2>
-        <h3>Porcentaje de Avance</h3>
-        <p>Temario</p>
-      </ion-label>
-    </ion-item>
-    <ion-item class="lesson_question">
-      <ion-avatar slot="start">
-        <img src="../../../assets/images/lesson.png" />
-      </ion-avatar>
-      <ion-label (click)="cargarLeccion()">
-        <h2>Lección 3</h2>
-        <h3>Porcentaje de Avance</h3>
-        <p>Temario</p>
-      </ion-label>
-    </ion-item>
-    <ion-item class="lesson_question">
-      <ion-avatar slot="start">
-        <img src="../../../assets/images/lesson.png" />
-      </ion-avatar>
-      <ion-label (click)="cargarLeccion()">
-        <h2>Lección 4</h2>
-        <h3>Porcentaje de Avance</h3>
-        <p>Temario</p>
-      </ion-label>
-    </ion-item>
-    <ion-item class="lesson_question">
-      <ion-avatar slot="start">
-        <img src="../../../assets/images/lesson.png" />
-      </ion-avatar>
-      <ion-label (click)="cargarLeccion()">
-        <h2>Lección 5</h2>
+      <ion-label (click)="cargarLeccion(leccion.idLeccion)">
+        <h2>{{leccion.tituloLeccion}}</h2>
         <h3>Porcentaje de Avance</h3>
         <p>Temario</p>
       </ion-label>
