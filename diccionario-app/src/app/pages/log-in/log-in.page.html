@@ -1,7 +1,6 @@
 <ion-header>
   <ion-toolbar>
     <ion-item class="arena">
-      
       <ion-title class="ion-text-center">Diccionario Rapa Nui</ion-title>
       <ion-img style="width: 30px; height: 30px;" src="./assets/images/moai.png"></ion-img>
     </ion-item>
@@ -27,12 +26,13 @@
     </ion-item>
     <ion-item>
       <ion-label>Recuerdame</ion-label>
-      <ion-checkbox slot= start class="ion-margin-top" [(ngModel)]="recordarSesion" position="floating"></ion-checkbox>
+      <ion-checkbox checked="false"  [(ngModel)]="checkLogin" slot= start class="ion-margin-top" id="Recordar" position="floating"></ion-checkbox>
     </ion-item>
     <ion-item >
-    <ion-button  class="ion-marging-top" class="arena" expand="block" (click)="validarLogin()" type="submit">Ingresar</ion-button>
+    <ion-button  class="ion-marging-top" class="arena" expand="block" (click)="validarUser(); checkLog()" type="submit">Ingresar</ion-button>
     <ion-button [routerLink]="['/log-in']" class="ion-marging-top" class="arena" expand="block" type="submit">cancelar</ion-button>    <br>
+    
   </ion-item>
     <ion-router-link class="color" class="ion-text-center">Recuperar contraseña</ion-router-link>
-    
+    <ion-button  class="ion-marging-top" class="arena" expand="block" (click)="almacenarUsuario()" type="submit">Guardar usuario</ion-button>
 </ion-content>
