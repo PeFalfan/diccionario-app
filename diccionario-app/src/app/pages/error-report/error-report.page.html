@@ -1,9 +1,53 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>error-report</ion-title>
+    <ion-item class="arena">
+      <ion-buttons slot="start">
+        <ion-back-button defaultHref="/"></ion-back-button>
+      </ion-buttons>
+      <ion-title class="ion-text-center">Reporte de errores</ion-title>
+      <ion-img style="width: 30px; height: 30px;" slot="end" src="./assets/images/moai.png"></ion-img>
+    </ion-item>
   </ion-toolbar>
+  <ion-item class="arena">
+    <ion-title class="ion-text-center">Seleccione</ion-title>
+  </ion-item>
 </ion-header>
 
 <ion-content>
 
+  <ion-accordion-group [multiple]="true" [value]="['colors', 'numbers']">
+    <ion-accordion value="leccion1">
+      <ion-item slot="header">
+        <ion-label>Correcciones Leccion 1</ion-label>
+      </ion-item>
+
+      <ion-list slot="content">
+        <ion-item>
+          <p> - Corregir alternativa 2 de la pregunta 3</p>
+        </ion-item>
+        <br>
+        <ion-item>
+          <p> - Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque maiores, sit cumque illum, quis nisi
+            voluptates aspernatur quam asperiores ad, maxime atque illo ducimus et minima odio vel perferendis qui!
+          </p>
+        </ion-item>
+      </ion-list>
+    </ion-accordion>
+    <ion-accordion value="leccion2">
+      <ion-item slot="header">
+        <ion-label>Correcciones Leccion 2</ion-label>
+      </ion-item>
+      <br>
+      <ion-list slot="content">
+        <ion-item>
+          <p> - Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptatum laborum rem corporis quis illum
+            eligendi quas cum, excepturi necessitatibus aut voluptatem odit. Quasi nisi dignissimos velit maiores, odio
+            nam inventore?</p>
+        </ion-item>
+        <ion-item>
+          <p> - Corregir texto en pregunta 8</p>
+        </ion-item>
+      </ion-list>
+    </ion-accordion>
+  </ion-accordion-group>
 </ion-content>
