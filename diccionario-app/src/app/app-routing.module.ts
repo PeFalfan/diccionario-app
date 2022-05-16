@@ -51,13 +51,15 @@ const routes: Routes = [
     path: 'students-messages',
     loadChildren: () => import('./pages/students-messages/students-messages.module').then( m => m.StudentsMessagesPageModule)
   },
-  
+  {
+    path: 'students-list',
+    loadChildren: () => import('./pages/students-list/students-list.module').then( m => m.StudentsListPageModule)
+  },
   {
     path: 'header',
     loadChildren: () => import('./pages/header/header.module').then( m => m.HeaderPageModule)
   },
-
-  
+];
 
 ];
 

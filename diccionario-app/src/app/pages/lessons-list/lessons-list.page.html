@@ -1,9 +1,38 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>lessons-list</ion-title>
+    <ion-item class="arena">
+      <ion-buttons slot="start">
+        <ion-back-button defaultHref="/"></ion-back-button>
+      </ion-buttons>
+      <ion-title class="ion-text-center">Lecciones Disponibles</ion-title>
+      <ion-img style="width: 30px; height: 30px;" slot="end" src="./assets/images/moai.png"></ion-img>
+    </ion-item>
   </ion-toolbar>
+  <ion-item class="arena">
+    <ion-title class="ion-text-center">Seleccione su lección</ion-title>
+  </ion-item>
 </ion-header>
 
-<ion-content>
 
+<ion-content>
+  <br>
+  <ion-list>
+    <ion-list-header>
+      <ion-label>Lecciones aprobadas: 1 / 2: 50%</ion-label>
+    </ion-list-header>
+    <ion-progress-bar value="0.5"></ion-progress-bar>
+  </ion-list>
+  <br>
+  <ion-list>
+    <ion-item class="lesson_question" *ngFor="let leccion of lecciones">
+      <ion-avatar slot="start">
+        <img src="../../../assets/images/lesson.png" alt="leccion" />
+      </ion-avatar>
+      <ion-label (click)="cargarLeccion(leccion.idLeccion)">
+        <h2>{{leccion.tituloLeccion}}</h2>
+        <h3>Porcentaje de Avance</h3>
+        <p>Temario</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
 </ion-content>
