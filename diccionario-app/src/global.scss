@@ -24,3 +24,26 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+
+
+.leccion {
+    margin-left: 37%;
+    ;
+}
+
+.lesson_question {
+    margin-top: 40px;
+}
+
+.lesson_button {
+    margin-top: 60px;
+    width: 30%;
+    margin-left: 13%;
+    margin-bottom: 20px;
+}
+
+.arena {
+    --background: #F5B041;
+    --color: #FFFFFF;
+    --border-padding-block: #009999;
+}

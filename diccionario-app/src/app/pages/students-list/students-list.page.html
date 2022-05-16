@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-item class="arena">
+      <ion-buttons slot="start">
+        <ion-back-button defaultHref="/"></ion-back-button>
+      </ion-buttons>
+      <ion-title class="ion-text-center">Listado de Alumnos</ion-title>
+      <ion-img style="width: 30px; height: 30px;" slot="end" src="./assets/images/moai.png"></ion-img>
+    </ion-item>
+  </ion-toolbar>
+  <ion-item class="arena">
+    <ion-title class="ion-text-center">Curso Rapa Nui</ion-title>
+  </ion-item>
+</ion-header>
+
+<ion-content>
+  <div class="ion-padding">
+    <!-- Theme classes dark, material, bootstrap -->
+    <ngx-datatable class="material" [limit]="8" [rows]="rows" [rowHeight]="50" [columns]="columns"
+      [columnMode]="'force'" [sortType]="'multi'" [headerHeight]="50" [footerHeight]="50">
+    </ngx-datatable>
+  </div>
+
+</ion-content>

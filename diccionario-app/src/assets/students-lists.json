@@ -1,0 +1,64 @@
+{
+    "students": [
+        {
+            "nombre": "Alumno 1",
+            "lecciones": "0/2",
+            "porcentaje": "0%"
+        },
+        {
+            "nombre": "Alumno 2",
+            "lecciones": "0/2",
+            "porcentaje": "0%"
+        },
+        {
+            "nombre": "Alumno 3",
+            "lecciones": "0/2",
+            "porcentaje": "0%"
+        },
+        {
+            "nombre": "Alumno 4",
+            "lecciones": "0/2",
+            "porcentaje": "0%"
+        },
+        {
+            "nombre": "Alumno 5",
+            "lecciones": "0/2",
+            "porcentaje": "0%"
+        },
+        {
+            "nombre": "Alumno 6",
+            "lecciones": "0/2",
+            "porcentaje": "0%"
+        },
+        {
+            "nombre": "Alumno 7",
+            "lecciones": "0/2",
+            "porcentaje": "0%"
+        },
+        {
+            "nombre": "Alumno 8",
+            "lecciones": "0/2",
+            "porcentaje": "0%"
+        },
+        {
+            "nombre": "Alumno 9",
+            "lecciones": "0/2",
+            "porcentaje": "0%"
+        },
+        {
+            "nombre": "Alumno 10",
+            "lecciones": "0/2",
+            "porcentaje": "0%"
+        },
+        {
+            "nombre": "Alumno 11",
+            "lecciones": "0/2",
+            "porcentaje": "0%"
+        },
+        {
+            "nombre": "Alumno 12",
+            "lecciones": "0/2",
+            "porcentaje": "0%"
+        }
+    ]
+}
