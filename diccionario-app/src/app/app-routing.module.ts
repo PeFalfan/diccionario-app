@@ -4,7 +4,7 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'log-in',
+    redirectTo: 'document-download',
     pathMatch: 'full'
   },
   {
@@ -61,7 +61,7 @@ const routes: Routes = [
   },
 ];
 
-];
+
 
 @NgModule({
   imports: [

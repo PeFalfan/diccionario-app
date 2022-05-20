@@ -38,6 +38,6 @@ instalación de la aplicación en un emulador o dispositivo, por medio de Androi
   
   la ip "192.168.0.13" es solo un ejemplo, se debe completar con tu ip
   
-  
+  ionic capacitor run android -l --external 
   
   
