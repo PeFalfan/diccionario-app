@@ -5,3 +5,4 @@ export interface ILeccion {
     tituloLeccion: string,
     preguntas: Array<IPregunta>
 }
+

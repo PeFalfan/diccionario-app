@@ -1,9 +1,52 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>register-form</ion-title>
+    <ion-item class="arena">
+      <ion-buttons slot="start">
+        <ion-back-button defaultHref="/"></ion-back-button>
+      </ion-buttons>
+      
+      <ion-title class="ion-text-center">Diccionario Rapa Nui</ion-title>
+      <ion-img style="width: 30px; height: 30px;" src="./assets/images/moai.png"></ion-img>
+    </ion-item>
   </ion-toolbar>
+  <ion-item class="arena">
+    <ion-title class="ion-text-center">Inscripción</ion-title>
+  </ion-item>
 </ion-header>
 
 <ion-content>
 
+  <ion-item class="ion-marging-top">
+    <ion-label position="floating">Nombre *</ion-label>
+    <ion-input [(ngModel)]="clientName"></ion-input>
+  </ion-item>
+
+  <ion-item class="ion-marging-top">
+    <ion-label position="floating">Apellidos *</ion-label>
+    <ion-input [(ngModel)]="clientLastNames"></ion-input>
+  </ion-item>
+
+  <ion-item class="ion-marging-top">
+    <ion-label position="floating">Teléfono *</ion-label>
+    <ion-input [(ngModel)]="clientPhone" placeholder="+56911111111"></ion-input>
+  </ion-item>
+
+  
+  <ion-item class="ion-marging-top">
+    <ion-label position="floating">E-mail *</ion-label>
+    <ion-input type="email" [(ngModel)]="clientEmail"></ion-input>
+  </ion-item>
+
+  <ion-item class="ion-marging-top">
+    <ion-label position="floating">Contraseña *</ion-label>
+    <ion-input [(ngModel)]="clientPassword"></ion-input>
+  </ion-item>
+
+  <ion-item class="ion-marging-top">
+    <ion-label position="floating">Repetir contraseña *</ion-label>
+    <ion-input [(ngModel)]="clientRepeatPassword"></ion-input>
+  </ion-item>
+
+  <ion-button class="arena" expand="block" (click)="validarCorreo(); validarCampos(); validarFono(); validarContrasena2();validarContrasena()"  type="submit">Registrar</ion-button>
+  
 </ion-content>
