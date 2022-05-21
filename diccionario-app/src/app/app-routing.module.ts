@@ -4,7 +4,7 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'document-load',
+    redirectTo: 'log-in',
     pathMatch: 'full'
   },
   {
@@ -60,7 +60,6 @@ const routes: Routes = [
     loadChildren: () => import('./pages/header/header.module').then(m => m.HeaderPageModule)
   },
 ];
-
 
 @NgModule({
   imports: [
