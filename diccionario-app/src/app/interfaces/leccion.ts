@@ -9,7 +9,8 @@ export interface ILeccion {
 
 export interface ITerm{
     word: string,
-    traslation:string
+    traslation:string,
+    pronunciation:string
 }
 
 export interface IDictionary {
