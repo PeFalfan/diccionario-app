@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { AlertController, NavController } from '@ionic/angular';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import { IPregunta } from '../../../interfaces/preguntas';
-import { ILeccion } from 'src/app/interfaces/leccion';
+import { ILeccion, ITerm } from 'src/app/interfaces/leccion';
+import { DictionaryService } from 'src/app/services/dictionary/dictionary.service';
+import { IDictionaryResponseModel } from 'src/app/interfaces/response-interfaces';
 
 
 
@@ -16,10 +18,108 @@ export class LessonDetailPage implements OnInit {
 
   leccion: ILeccion
   preguntas: Array<IPregunta>
+  /**
+   * de momento se quedan las alternativas en duro, pero se debe considerar crear un servicio que: 
+   * genere una lista de palabras diferentes a la correcta para cada pregunta, eso, o tomar 
+   * cantidad N de palabras al azar del diccionario, y de manera aleatoria repartirlas como 
+   * alternativas, puede producir el problema de duplicidad si no validamos bien.
+   */
 
+  alternativas:any = [
+    {
+      word:'algo 1',
+      traslation: 'traduccion 1'
+    },
+    {
+      word:'algo 2',
+      traslation: 'traduccion 2'
+    },
+    {
+      word:'algo 3',
+      traslation: 'traduccion 3'
+    },
+    {
+      word:'algo 4',
+      traslation: 'traduccion 4'
+    },
+    {
+      word:'algo 5',
+      traslation: 'traduccion 5'
+    },
+    {
+      word:'algo 6',
+      traslation: 'traduccion 6'
+    },
+    {
+      word:'algo 7',
+      traslation: 'traduccion 7'
+    },
+    {
+      word:'algo 8',
+      traslation: 'traduccion 8'
+    },
+    {
+      word:'algo 9',
+      traslation: 'traduccion 9'
+    },
+    {
+      word:'algo 10',
+      traslation: 'traduccion 10'
+    },
+    {
+      word:'algo 11',
+      traslation: 'traduccion 11'
+    },
+    {
+      word:'algo 1',
+      traslation: 'traduccion 1'
+    },
+    {
+      word:'algo 2',
+      traslation: 'traduccion 2'
+    },
+    {
+      word:'algo 3',
+      traslation: 'traduccion 3'
+    },
+    {
+      word:'algo 4',
+      traslation: 'traduccion 4'
+    },
+    {
+      word:'algo 5',
+      traslation: 'traduccion 5'
+    },
+    {
+      word:'algo 6',
+      traslation: 'traduccion 6'
+    },
+    {
+      word:'algo 7',
+      traslation: 'traduccion 7'
+    },
+    {
+      word:'algo 8',
+      traslation: 'traduccion 8'
+    },
+    {
+      word:'algo 9',
+      traslation: 'traduccion 9'
+    },
+    {
+      word:'algo 10',
+      traslation: 'traduccion 10'
+    },
+    {
+      word:'algo 11',
+      traslation: 'traduccion 11'
+    }
+  ]
 
-
-  constructor(private alertController: AlertController, public navController: NavController, private ServiceUsuario: UsuarioService) { }
+  constructor(private alertController: AlertController, 
+              public navController: NavController, 
+              private ServiceUsuario: UsuarioService,
+              private dicService: DictionaryService) { }
 
   ngOnInit() {
     try {
@@ -34,12 +134,25 @@ export class LessonDetailPage implements OnInit {
     } catch (error) {
       console.log('error al cargar leccion')
     }
+
+    //this.alternativas.sort((a, b) => a.word < b.word ? -1 : a.word > b.word ? 1 : 0)
   }
 
+  aleatorio(inferior, superior) {
+    var numPosibilidades = superior - inferior;
+    var aleatorio = Math.random() * (numPosibilidades + 1);
+    aleatorio = Math.floor(aleatorio);
+    return inferior + aleatorio;
+}
 
+// Eventualmente hay que utilizar este servicio para cargar palabras aleatorias del back, que se utilizarán como alternativas.
+/*loadDictionary(){
+  this.dicService.loadDictionary().subscribe((resp:IDictionaryResponseModel) => {
+    this.alternativas = resp.data
+  })
+}*/
 
-
-  async AlertaLeccion() {
+  async alertaLeccion() {
 
     const alert = await this.alertController.create({
       header: '¿Esta seguro de enviar la lección?',
@@ -70,7 +183,7 @@ export class LessonDetailPage implements OnInit {
 
   }
 
-  async AlertaCancelar() {
+  async alertaCancelar() {
 
     const alert = await this.alertController.create({
       header: '¿Esta seguro que desea abandonar la lección?',
@@ -101,7 +214,7 @@ export class LessonDetailPage implements OnInit {
 
   }
 
-  async AlertaComentario() {
+  async alertaComentario() {
 
     const alert = await this.alertController.create({
       header: 'Ingrese su comentario:',

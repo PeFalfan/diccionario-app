@@ -18,19 +18,19 @@
   <br>
   <ion-list>
     <ion-list-header>
-      <ion-label>Lecciones aprobadas: 1 / 2: 50%</ion-label>
+      <ion-label>Lecciones aprobadas: 3 / 7: 43%</ion-label>
     </ion-list-header>
-    <ion-progress-bar value="0.5"></ion-progress-bar>
+    <ion-progress-bar value="0.43"></ion-progress-bar>
   </ion-list>
   <br>
   <ion-list>
-    <ion-item class="lesson_question" *ngFor="let leccion of lecciones">
+    <ion-item *ngFor="let less of lessons">
       <ion-avatar slot="start">
         <img src="../../../assets/images/lesson.png" alt="leccion" />
       </ion-avatar>
-      <ion-label (click)="cargarLeccion(leccion.idLeccion)">
-        <h2>{{leccion.tituloLeccion}}</h2>
-        <h3>Porcentaje de Avance</h3>
+      <ion-label (click)="cargarLeccion(less)">
+        <h2>{{less.tituloLeccion}}</h2>
+        <h3>Estado: {{less.estadoLeccion == 2 ? 'Completo' : 'Pendiente'}}</h3>
         <p>Temario</p>
       </ion-label>
     </ion-item>
