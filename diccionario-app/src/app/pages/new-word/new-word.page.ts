@@ -1,5 +1,8 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { AlertController, NavController } from '@ionic/angular';
+import { ITerm } from 'src/app/interfaces/leccion';
+import { IResponseModel } from 'src/app/interfaces/response-interfaces';
+import { DictionaryService } from 'src/app/services/dictionary/dictionary.service';
 
 @Component({
   selector: 'app-new-word',
@@ -10,10 +13,35 @@ export class NewWordPage implements OnInit {
 
   palabraEsp: string = ''
   palabraRapa: string = ''
+  file: File
+  newTerm: ITerm = {
+    word: '',
+    traslation: '',
+    pronunciation: ''
+  }
 
-  constructor(private alertController: AlertController, public navController: NavController) { }
+
+  constructor(private alertController: AlertController, 
+              private navController: NavController,
+              private dictionaryService: DictionaryService) { }
 
   ngOnInit() {
+  }
+
+  wavToBase64(event:any){
+    this.file = event.target.files[0];
+
+    const reader = new FileReader();
+    reader.readAsDataURL(this.file);
+    reader.onload = () => {
+      const res: string = reader.result as string
+      
+      this.newTerm.pronunciation = res.slice(22);
+      alert("base64?"+this.newTerm.pronunciation)
+    };
+    reader.onerror = (error) => {
+      alert(error);
+    }
   }
 
   cancelarPalabra() {
@@ -23,17 +51,28 @@ export class NewWordPage implements OnInit {
   limpiarFormulario() {
     this.palabraEsp = ''
     this.palabraRapa = ''
+    this.newTerm.word = this.palabraEsp;
+    this.newTerm.traslation = this.palabraRapa;
   }
 
   guardarPalabra() {
-    var palabraEsp = this.palabraEsp
+    var palabraEsp = this.palabraEsp;
     var palabraRapa = this.palabraRapa;
 
     if (palabraEsp == '' || palabraRapa == '') {
       this.camposVacios();
     }
     else {
-      this.AlertaPalabra();
+      this.newTerm.word = this.palabraEsp;
+      this.newTerm.traslation = this.palabraRapa;
+      this.dictionaryService.addNewTerm(this.newTerm).subscribe((resp:IResponseModel) => {
+        if (resp.data != null){
+          this.AlertaPalabra();
+        }else{
+          alert("Error: " + resp.error)
+        }
+      })
+      
     }
   }
 
