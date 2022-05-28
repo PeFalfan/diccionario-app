@@ -6,7 +6,7 @@
         <ion-toolbar>
           <ion-item class="verde">
           <ion-title>App Rapanui</ion-title>
-          <ion-img style="width: 30px; height: 30px;" src="./assets/images/huella2.png"></ion-img>
+          
         </ion-item>
         </ion-toolbar>
       </ion-header>
@@ -16,6 +16,18 @@
             <ion-icon name="home-outline" slot="start"></ion-icon>
             <ion-label (click)="goTo('home')">Inicio</ion-label>
           </ion-item>
+          <ion-item>
+            <ion-icon name="git-merge-outline" slot="start"></ion-icon>
+            <ion-label (click)="goTo('lessons-list')">Lecciones</ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-icon name="book-outline" slot="start"></ion-icon>
+            <ion-label (click)="goTo('dictionary')">Diccionario</ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-icon name="newspaper-outline" slot="start"></ion-icon>           
+            <ion-label (click)="goTo('register-form')">Formulario de registro</ion-label>
+          </ion-item>  
           <ion-item>
             <ion-icon name="cloud-download-outline" slot="start"></ion-icon>
             <ion-label (click)="goTo('document-download')">Descargar Documento</ion-label>
