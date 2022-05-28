@@ -1,5 +1,3 @@
-import { ILeccion } from "./leccion";
-
 export interface IComentario {
 
     idComentario: number,

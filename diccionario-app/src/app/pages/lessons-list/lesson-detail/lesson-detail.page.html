@@ -23,19 +23,16 @@
               </ion-label>
               <ion-radio color="success" slot="start" value="1"></ion-radio>
             </ion-item>
-
             <ion-item>
-              <ion-label>Alternativa 2</ion-label>
+              <ion-label>{{alternativas[pregunta.idPregunta-1].word}}</ion-label>
               <ion-radio color="success" slot="start" value="2"></ion-radio>
             </ion-item>
-
             <ion-item>
-              <ion-label>Alternativa 3</ion-label>
+              <ion-label>{{alternativas[pregunta.idPregunta].word}}</ion-label>
               <ion-radio color="success" slot="start" value="3"></ion-radio>
             </ion-item>
-
             <ion-item>
-              <ion-label>Alternativa 4</ion-label>
+              <ion-label>{{alternativas[pregunta.idPregunta + 1].word}}</ion-label>
               <ion-radio color="success" slot="start" value="4"></ion-radio>
             </ion-item>
           </ion-radio-group>
@@ -43,7 +40,7 @@
       </ion-col>
     </ion-item>
   </ion-list>
-  <ion-button expand="block" style="margin-top:10%;" (click)="AlertaComentario()">Enviar Comentario</ion-button>
-  <ion-button class="lesson_button" (click)="AlertaCancelar()">Cancelar</ion-button>
-  <ion-button class="lesson_button" (click)="AlertaLeccion()">Enviar</ion-button>
+  <ion-button expand="block" style="margin-top:10%;" (click)="alertaComentario()">Enviar Comentario</ion-button>
+  <ion-button class="lesson_button" (click)="alertaCancelar()">Cancelar</ion-button>
+  <ion-button class="lesson_button" (click)="alertaLeccion()">Enviar</ion-button>
 </ion-content>
