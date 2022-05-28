@@ -5,6 +5,7 @@ import { IPregunta } from '../../../interfaces/preguntas';
 import { ILeccion, ITerm } from 'src/app/interfaces/leccion';
 import { DictionaryService } from 'src/app/services/dictionary/dictionary.service';
 import { IDictionaryResponseModel } from 'src/app/interfaces/response-interfaces';
+import { IComentario } from 'src/app/interfaces/comentario';
 
 
 
@@ -116,9 +117,16 @@ export class LessonDetailPage implements OnInit {
     }
   ]
 
+  comentario:IComentario = {
+    idCommentary: 0,
+    commentary: '',
+    idLesson: 0,
+    idUser: 0
+  }
+
   constructor(private alertController: AlertController, 
               public navController: NavController, 
-              private ServiceUsuario: UsuarioService,
+              private serviceUsuario: UsuarioService,
               private dicService: DictionaryService) { }
 
   ngOnInit() {
@@ -134,6 +142,9 @@ export class LessonDetailPage implements OnInit {
     } catch (error) {
       console.log('error al cargar leccion')
     }
+
+    this.comentario.idLesson = this.leccion.idLeccion;
+    this.comentario.idUser = 1; // de momento el usuario en duro, a cambiar al momento de iniciar con el manejo de servicios.
 
     //this.alternativas.sort((a, b) => a.word < b.word ? -1 : a.word > b.word ? 1 : 0)
   }
@@ -240,8 +251,9 @@ export class LessonDetailPage implements OnInit {
             id: 'confirm-button',
             handler: (alertData) => {
               console.log('OK');
-              var comentario = alertData.comentario
-              console.log(comentario);
+              this.comentario.commentary = alertData.comentario;
+              console.log(this.comentario.commentary);
+              this.guardarComentario()
             }
           }
         ]
@@ -253,16 +265,16 @@ export class LessonDetailPage implements OnInit {
   }
 
 
-  /*guardarComentario() {
-    this.ServiceUsuario.createComment(this.comentario).subscribe(resp => {
+  guardarComentario() {
+    this.serviceUsuario.createComment(this.comentario).subscribe(resp => {
       if (Number(resp.data) == 1) {
-        console.log('comentario ok')
+        alert('comentario ok')
       }
       else {
-        console.log('comentario no ok')
+        alert('comentario no ok')
       }
     })
-  }*/
+  }
 }
 
 

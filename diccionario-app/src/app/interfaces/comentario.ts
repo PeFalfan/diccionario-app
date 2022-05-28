@@ -1,7 +1,7 @@
 export interface IComentario {
 
-    idComentario: number,
-    textoComentario: string,
-    idLeccion: number,
-    idUsuario: number
+    idCommentary: number,
+    commentary: string,
+    idLesson: number,
+    idUser: number
 }

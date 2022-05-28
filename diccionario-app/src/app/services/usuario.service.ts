@@ -16,7 +16,7 @@ export class UsuarioService {
   constructor(private http: HttpClient) { }
 
   createComment(commentLeccion: IComentario): Observable<IResponseModel> {
-    let urlToHit = this.url + "/createComment";
+    let urlToHit = this.url + "/addCommentary";
     return this.http.post<IResponseModel>(urlToHit, commentLeccion)
   }
 
