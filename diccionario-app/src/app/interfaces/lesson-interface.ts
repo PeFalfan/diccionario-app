@@ -1,5 +1,3 @@
-import { IPregunta } from "./preguntas";
-
 export interface ILeccion {
     idLeccion: number,
     estadoLeccion: number;
@@ -20,4 +18,19 @@ export interface IDictionary {
 export interface IAlternatives{
     word: string,
     isCorrect:boolean
+}
+
+export interface IComentario {
+    idCommentary: number,
+    commentary: string,
+    idLesson: number,
+    idUser: number
+    creationDate: Date
+}
+
+export interface IPregunta {
+    idLeccion: number,
+    idPregunta: number,
+    textoPregunta: string,
+    palabraDiccionario: string
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { IDictionary } from 'src/app/interfaces/leccion';
+import { IDictionary } from 'src/app/interfaces/lesson-interface';
 import { IDictionaryResponseModel } from 'src/app/interfaces/response-interfaces';
 import { DictionaryService } from 'src/app/services/dictionary/dictionary.service';
 

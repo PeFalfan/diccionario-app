@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { AlertController, NavController } from '@ionic/angular';
-import { ITerm } from 'src/app/interfaces/leccion';
+import { ITerm } from 'src/app/interfaces/lesson-interface';
 import { IResponseModel } from 'src/app/interfaces/response-interfaces';
 import { DictionaryService } from 'src/app/services/dictionary/dictionary.service';
 

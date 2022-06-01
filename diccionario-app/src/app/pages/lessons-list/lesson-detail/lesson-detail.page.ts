@@ -1,12 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertController, NavController } from '@ionic/angular';
-import { UsuarioService } from 'src/app/services/usuario.service';
-import { IPregunta } from '../../../interfaces/preguntas';
-import { ILeccion, ITerm } from 'src/app/interfaces/leccion';
+import { IComentario, ILeccion, IPregunta, ITerm } from 'src/app/interfaces/lesson-interface';
+import { IUser } from 'src/app/interfaces/user-interfaces';
 import { DictionaryService } from 'src/app/services/dictionary/dictionary.service';
-import { IDictionaryResponseModel } from 'src/app/interfaces/response-interfaces';
-import { IComentario } from 'src/app/interfaces/comentario';
-
+import { UserService } from 'src/app/services/user/usuario.service';
 
 
 @Component({
@@ -19,6 +16,7 @@ export class LessonDetailPage implements OnInit {
 
   leccion: ILeccion
   preguntas: Array<IPregunta>
+  inSessionUser : IUser
   /**
    * de momento se quedan las alternativas en duro, pero se debe considerar crear un servicio que: 
    * genere una lista de palabras diferentes a la correcta para cada pregunta, eso, o tomar 
@@ -121,12 +119,13 @@ export class LessonDetailPage implements OnInit {
     idCommentary: 0,
     commentary: '',
     idLesson: 0,
-    idUser: 0
+    idUser: 0,
+    creationDate: undefined
   }
 
   constructor(private alertController: AlertController, 
               public navController: NavController, 
-              private serviceUsuario: UsuarioService,
+              private serviceUsuario: UserService,
               private dicService: DictionaryService) { }
 
   ngOnInit() {

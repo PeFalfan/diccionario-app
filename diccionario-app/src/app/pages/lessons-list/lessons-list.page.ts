@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
-import { ILeccion } from 'src/app/interfaces/leccion';
-import { IPregunta } from 'src/app/interfaces/preguntas';
-import { IResponseModelLeccion } from 'src/app/interfaces/respuestaLeccion';
-import { UsuarioService } from 'src/app/services/usuario.service';
-
+import { ILeccion, IPregunta } from 'src/app/interfaces/lesson-interface';
+import { IUser } from 'src/app/interfaces/user-interfaces';
+import { DatabaseService } from 'src/app/services/database/database.service';
+import { UserService } from 'src/app/services/user/usuario.service';
 
 
 @Component({
@@ -16,46 +15,38 @@ import { UsuarioService } from 'src/app/services/usuario.service';
 })
 export class LessonsListPage implements OnInit {
 
-  /*
-  leccion: ILeccion = {
-    idLeccion: 1,
-    tituloLeccion: 'Leccion 1',
-    preguntas: [{ idLeccion: 1, idPregunta: 1, textoPregunta: 'pregunta 1', palabraDiccionario: 'hola' }, { idLeccion: 1, idPregunta: 2, textoPregunta: 'pregunta 2', palabraDiccionario: 'chao' }, { idLeccion: 1, idPregunta: 3, textoPregunta: 'pregunta 3', palabraDiccionario: 'caca' }, { idLeccion: 1, idPregunta: 4, textoPregunta: 'pregunta 4', palabraDiccionario: 'dfgfdgd' }]
-  }
-  */
-
-  /*
-  lecciones: IResponseModelLeccion = {
-    error: 'error',
-    messageResponse: 'errorergeoeoroege',
-    data: [{
-      idLeccion: 1,
-      tituloLeccion: 'Leccion 1',
-      preguntas: [{ idLeccion: 1, idPregunta: 1, textoPregunta: 'pregunta 1', palabraDiccionario: 'hola' }, { idLeccion: 1, idPregunta: 2, textoPregunta: 'pregunta 2', palabraDiccionario: 'chao' }, { idLeccion: 1, idPregunta: 3, textoPregunta: 'pregunta 3', palabraDiccionario: 'caca' }, { idLeccion: 1, idPregunta: 4, textoPregunta: 'pregunta 4', palabraDiccionario: 'dfgfdgd' }]
-    },
-    {
-      idLeccion: 2,
-      tituloLeccion: 'Leccion 2',
-      preguntas: [{ idLeccion: 2, idPregunta: 1, textoPregunta: 'pregunta 1', palabraDiccionario: 'hola' }, { idLeccion: 2, idPregunta: 2, textoPregunta: 'pregunta 2', palabraDiccionario: 'chao' }, { idLeccion: 2, idPregunta: 3, textoPregunta: 'pregunta 3', palabraDiccionario: 'caca' }, { idLeccion: 2, idPregunta: 4, textoPregunta: 'pregunta 4', palabraDiccionario: 'dfgfdgd' }]
-    }]
-  }
-  */
-
   pregunta: Array<IPregunta>
   lessons: Array<ILeccion>
   leccionAEnviar: ILeccion
   lastLessonApproved:number
+  inSessionUser : IUser = {
+    clientName: '',
+    clientLastNames: '',
+    clientPhone: '',
+    idUser: 0,
+    clientEmail: '',
+    clientPassword: '',
+    userType: 0,
+    remember: false
+  }
 
   constructor(private router: Router, 
-              public navController: NavController, 
-              private serviceUsuario: UsuarioService) { }
+              private navController: NavController, 
+              private serviceUsuario: UserService,
+              private dbService: DatabaseService) { }
 
   ngOnInit() {
 
     this.cargaLecciones();
 
-    
+    this.loadUser();
 
+  }
+
+  loadUser(){
+    this.dbService.loadUserInSession().then((resp:IUser) =>{
+      this.inSessionUser = resp;
+    })
   }
 
   lastApproved(){
@@ -71,8 +62,6 @@ export class LessonsListPage implements OnInit {
 
   cargarLeccion(lesson:ILeccion) {
     this.lastApproved();
-    alert("ultima aprovada: " + this.lastLessonApproved)
-    alert("seleccionada: " + lesson.idLeccion)
     if(this.lastLessonApproved +1 >= lesson.idLeccion){
       this.lessons.forEach(element => {
         if (element.idLeccion == lesson.idLeccion) {
@@ -90,8 +79,10 @@ export class LessonsListPage implements OnInit {
   }
 
   cargaLecciones() {
+    console.log("Peter: servicio carga de lecciones")
     this.serviceUsuario.loadLessons().subscribe(resp => {
       this.lessons = resp.data
+      console.log("Peter: servicio carga de lecciones" + resp.data)
     })
   }
 

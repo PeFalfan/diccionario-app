@@ -3,7 +3,7 @@ import { environment } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { IDictionaryResponseModel, IResponseModel } from 'src/app/interfaces/response-interfaces';
-import { ITerm } from 'src/app/interfaces/leccion';
+import { ITerm } from 'src/app/interfaces/lesson-interface';
 
 @Injectable({
   providedIn: 'root'

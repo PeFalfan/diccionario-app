@@ -1,6 +1,7 @@
 export interface IDocumento {
 
-    idDocumento: number,
-    documento: string,
-    idLeccion: number
+    idDocument: number,
+    nameDocument:string,
+    document: string,
+    idLesson: number
 }

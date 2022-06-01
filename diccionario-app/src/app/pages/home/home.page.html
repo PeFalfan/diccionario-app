@@ -4,7 +4,7 @@
       <ion-buttons slot="start">
         <ion-menu-button autoHide="false"></ion-menu-button>
       </ion-buttons>
-      <ion-title class="ion-text-center">Bienvenido</ion-title>
+      <ion-title class="ion-text-center">Bienvenido {{inSessionUser.clientName}}!!!</ion-title>
       <ion-img style="width: 30px; height: 30px;" src="./assets/images/moai.png"></ion-img>
     </ion-item>
   </ion-toolbar>
@@ -21,5 +21,7 @@
       Ingresa al grupo de wsp Aqui!
     </ion-label>
   </ion-item>
+
+  <p>Texto de ejemplo de {{control}}</p>
 
 </ion-content>

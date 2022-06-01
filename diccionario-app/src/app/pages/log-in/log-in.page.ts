@@ -1,7 +1,11 @@
 import { Component, ComponentFactoryResolver, OnInit } from '@angular/core';
-import { NavController, ToastController } from '@ionic/angular';
+import { Router } from '@angular/router';
+import { AlertController } from '@ionic/angular';
 import { ILogin } from 'src/app/interfaces/login-interfaces';
-import {UsuarioService} from '../../services/usuario/usuario.service';
+import { ILogInResponseModel, IResponseModel } from 'src/app/interfaces/response-interfaces';
+import { IUser } from 'src/app/interfaces/user-interfaces';
+import { DatabaseService } from 'src/app/services/database/database.service';
+import { UserService } from 'src/app/services/user/usuario.service';
 
 
 @Component({
@@ -10,100 +14,175 @@ import {UsuarioService} from '../../services/usuario/usuario.service';
   styleUrls: ['./log-in.page.scss'],
 })
 export class LogInPage implements OnInit {
-clientEmailLogin: string= "";
-clientPasswordLogin: string="";
-checkLogin: boolean= false;
 
-  constructor(public navctrl: NavController, private servicioLogin: UsuarioService, private toastctrl: ToastController) { 
-    this.verificarSesion();
+  clientEmail: string;
+  clientPassword: string;
+  checkLogin: boolean;
+  logIn: ILogin = {
+    email: '',
+    password: ''
   }
-  login: ILogin = {
-    email: "",
-    password:""
+
+  loggedUser: IUser = {
+    clientName: '',
+    clientLastNames: '',
+    clientPhone: '',
+    idUser: 0,
+    clientEmail: '',
+    clientPassword: '',
+    userType: 0,
+    remember: false
   }
+
+  logCorrecto: boolean = false;
+
+  constructor(private dbService: DatabaseService,
+    private userService: UserService,
+    private alertController: AlertController,
+    private router: Router) {
+  }
+
   ngOnInit() {
   }
 
-validarLogin(){
-  var correo= this.clientEmailLogin
-  var contrasena= this.clientPasswordLogin
-  this.login.email= correo
-  this.login.password= contrasena
+  ionViewDidEnter() {
+    // primero, al iniciar, validamos que el ultimo usuario en la bd quiere ser recordado o no:
+    try {
+      this.dbService.loadUserInSession().then((resp: IUser) => {
 
-  if(correo!="" && contrasena!=""){
-    console.log("login ok")
-    this.servicioLogin.login(this.login).subscribe(resp => {
-      if (Number (resp.data)== 1){
-        this.navctrl.navigateRoot("home")
-      }else{
-        console.log("login no ok")
-      }
-    } )
-  }else{
-    console.log("login no ok")
+        let usuario: IUser = resp;
+        this.loggedUser = usuario;
+
+        if(resp != undefined && resp != null){
+
+          this.logCorrecto = true;
+
+        }else{
+
+          this.logCorrecto = false;
+
+        }
+
+        this.wantedToBeRemembered();
+
+      }).catch(e => {
+
+        alert("Error en llamada a bd local: " + e.message)
+        this.logCorrecto = false
+
+      })
+
+    } catch (error) {
+
+      alert("Error en carga desde LOCAL: " + error.message)
+      this.logCorrecto = false
+
+    }
+
   }
-}
 
-checkLog(checkLogin){
-  if(this.checkLogin== false){
-  console.log('CHECK NO MARCADO')
-  }else{
-    this.marcaUsuario();
-   console.log('CHECK MARCADO')
-}
-}
+  wantedToBeRemembered() {
+    // si quiere ser recordado, con sus datos, navegamos directamente al home, enviando al usuario que tenemos en la bd local
+    this.toHome();
 
-marcaUsuario() {
-  this.servicioLogin.marcaUsuario();
-
-}
-
-almacenarUsuario(){
-  this.servicioLogin.almacenarUsuario();{
-    this.presentToast();
   }
-}
 
-async presentToast() {
-  const toast = await this.toastctrl.create({
-    message: 'Usuario creado correctamente',
-    duration: 3000
-  });
-  toast.present();
-}
-async presentToast5() {
-  const toast = await this.toastctrl.create({
-    message: 'cerdenciales correctas',
-    duration: 3000
-  });
-  toast.present();
-}
+  // validaciones primarias para el input de log IN (correo / contraseña)
+  validateInputs() {
 
-validarUser() {
-  
-    if (this.clientEmailLogin === 'p@p.cl' && this.clientPasswordLogin === '1234') {
-      this.presentToast5();
-      this.navctrl.navigateRoot('home', { queryParams: { 'usuario': this.clientEmailLogin} });
+    let title;
+    let message;
+    // de momento se valida que se esté entregando algo, hay que hacer la validación de que tenga un @ o cualquier cosa,
+    // de más está decir que esta validación se debe agregar como un 'else if'.
+    if (this.clientEmail == "" || this.clientPassword == "") {
+
+      title = "Error de ingreso";
+      message = "Favor completar campos correo/contraseña";
+      this.modelAlert(title, message);
+      this.logCorrecto = false
+
     } else {
-      console.log('USUARIO INVALIDO')
+
+      title = "Ingreso de usuario";
+
+      this.logIn.email = this.clientEmail;
+
+      this.logIn.password = this.clientPassword;
+
+      this.userService.login(this.logIn).subscribe((resp: ILogInResponseModel) => {
+
+        this.loggedUser = resp.data;
+
+        if (this.loggedUser == null || this.loggedUser == undefined) {
+
+          message = "Credenciales incorrectas."
+          this.logCorrecto = false
+          this.modelAlert(title, message);
+
+        } else {
+
+          message = "Ingreso correcto de usuario. \n"
+
+          if (this.checkLogin) {
+
+            message += "Se recordará al usuario!"
+
+          }
+
+          this.logCorrecto = true;
+
+          this.rememberSession();
+          this.modelAlert(title, message);
+          this.toHome();
+
+        }
+
+      });
+
+    }
+
+  }
+
+  // generic alert to give feedback to the user
+  async modelAlert(title, messages) {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: title,
+      message: messages,
+      buttons: [{
+        text: 'Okay',
+        id: 'confirm-button',
+        handler: () => {
+          if (messages != "Credenciales incorrectas." && messages != "Favor completar campos correo/contraseña") {
+            this.logCorrecto = true;
+            this.toHome();
+          }
+        }
+      }
+      ]
+    });
+
+    await alert.present();
+  }
+
+  // valida el checkbox, seleccionado para recordar.
+  rememberSession() {
+
+    this.loggedUser.remember = this.checkLogin
+
+    this.dbService.saveUser(this.loggedUser);
+
+  }
+
+  // navegacion a HOME
+  toHome() {
+
+    if (this.logCorrecto){
+      this.router.navigate(['home'], {
+        state: {
+          data: this.loggedUser
+        }
+      });
     }
   }
-
-  
-
-  verificarSesion() {
-    this.servicioLogin.verificarSesion().then((data) => {
-      if (data === 'NO-LOGUEADO') {
-        console.log('NO HAY USUARIO LOGUEADO')
-      }
-      else {
-        this.validarUser()
-        console.log(this.clientEmailLogin + 'MODELO USUARIO DEL LOGIN')
-        this.navctrl.navigateRoot('home', { queryParams: { 'usuario': this.clientEmailLogin } });
-      };
-    });
-  }
-
 }
-
-

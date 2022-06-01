@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import {UsuarioService} from '../../services/usuario/usuario.service';
+import { IUser } from 'src/app/interfaces/user-interfaces';
+import { DatabaseService } from 'src/app/services/database/database.service';
 
 @Component({
   selector: 'app-home',
@@ -9,20 +10,69 @@ import {UsuarioService} from '../../services/usuario/usuario.service';
 })
 export class HomePage implements OnInit {
 
-
-  constructor(public rutaActiva: ActivatedRoute, private servicioLogin: UsuarioService) 
-  { this.servicioLogin.verificarSesion();}
-    
-  ngOnInit() {
+  inSessionUser: IUser = {
+    clientName: '',
+    clientLastNames: '',
+    clientPhone: '',
+    idUser: 0,
+    clientEmail: '',
+    clientPassword: '',
+    userType: 0,
+    remember: false
   }
 
-cerrarSesion(){
-  this.servicioLogin.desmarcaUsuario();
-  this.volverLogin();
-}
+  control: string = "Control";
 
-volverLogin(){
-  window.location.assign('/log-in')
-}
+  constructor(private rutaActiva: ActivatedRoute,
+    private dbService: DatabaseService) {
+  }
+
+  ngOnInit() {
+    try {
+
+      const params = history.state;
+
+      if (params.data != undefined || params.data != null) {
+
+        this.inSessionUser = params.data
+
+      }
+      else {
+
+        console.log("No se recibe desde login")
+        this.loadUser();
+
+      }
+
+    } catch (error) {
+
+      console.log("INIT HOME con error " + error.message)
+
+    }
+  }
+
+  loadUser() {
+    this.dbService.loadUserInSession().then((resp: any) => {
+
+      this.inSessionUser = resp;
+
+    }, (error) => {
+      console.log("Peter: " + error)
+    })
+
+  }
+
+  cerrarSesion() {
+
+    this.dbService.clearSession();
+    this.volverLogin();
+
+  }
+
+  volverLogin() {
+
+    window.location.assign('/log-in')
+
+  }
 
 }
