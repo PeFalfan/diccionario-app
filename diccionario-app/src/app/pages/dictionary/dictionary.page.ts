@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { IDictionary } from 'src/app/interfaces/lesson-interface';
+import { IDictionaryResponseModel } from 'src/app/interfaces/response-interfaces';
+import { DictionaryService } from 'src/app/services/dictionary/dictionary.service';
 
 @Component({
   selector: 'app-dictionary',
@@ -7,9 +10,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DictionaryPage implements OnInit {
 
-  constructor() { }
+  dictionary: IDictionary
+
+  constructor(private dictionaryService: DictionaryService) { }
 
   ngOnInit() {
+    this.loadDictionary();
+  }
+
+  loadDictionary(){
+    this.dictionaryService.loadDictionary().subscribe((resp:IDictionaryResponseModel) => {
+      this.dictionary = resp.data;
+    })
+  }
+
+  playAudio(audiobase64:string){
+    var snd = new Audio("data:audio/wav;base64," + audiobase64);
+    snd.play();
   }
 
 }

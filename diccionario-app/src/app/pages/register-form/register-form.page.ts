@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
 
-import { IUsuario } from 'src/app/interfaces/incripcion-interfaces';
-import { UsuarioService } from 'src/app/services/usuario/usuario.service';
+import { IUser } from 'src/app/interfaces/user-interfaces';
+import { UserService } from 'src/app/services/user/usuario.service';
 
 @Component({
   selector: 'app-register-form',
@@ -18,9 +18,9 @@ clientEmail: string="";
 clientPassword: string= "";
 clientRepeatPassword: string= "";
 
-usuario: IUsuario;
+usuario: IUser;
 
-  constructor(public navctrl: NavController, private servicioUsuario: UsuarioService) { }
+  constructor(public navctrl: NavController, private servicioUsuario: UserService) { }
 
   ngOnInit() {
   }

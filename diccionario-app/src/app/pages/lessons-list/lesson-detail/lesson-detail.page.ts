@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertController, NavController } from '@ionic/angular';
-import { UsuarioService } from 'src/app/services/usuario.service';
-import { IPregunta } from '../../../interfaces/preguntas';
-import { ILeccion } from 'src/app/interfaces/leccion';
-
+import { IComentario, ILeccion, IPregunta, ITerm } from 'src/app/interfaces/lesson-interface';
+import { IUser } from 'src/app/interfaces/user-interfaces';
+import { DictionaryService } from 'src/app/services/dictionary/dictionary.service';
+import { UserService } from 'src/app/services/user/usuario.service';
 
 
 @Component({
@@ -16,10 +16,117 @@ export class LessonDetailPage implements OnInit {
 
   leccion: ILeccion
   preguntas: Array<IPregunta>
+  inSessionUser : IUser
+  /**
+   * de momento se quedan las alternativas en duro, pero se debe considerar crear un servicio que: 
+   * genere una lista de palabras diferentes a la correcta para cada pregunta, eso, o tomar 
+   * cantidad N de palabras al azar del diccionario, y de manera aleatoria repartirlas como 
+   * alternativas, puede producir el problema de duplicidad si no validamos bien.
+   */
 
+  alternativas:any = [
+    {
+      word:'algo 1',
+      traslation: 'traduccion 1'
+    },
+    {
+      word:'algo 2',
+      traslation: 'traduccion 2'
+    },
+    {
+      word:'algo 3',
+      traslation: 'traduccion 3'
+    },
+    {
+      word:'algo 4',
+      traslation: 'traduccion 4'
+    },
+    {
+      word:'algo 5',
+      traslation: 'traduccion 5'
+    },
+    {
+      word:'algo 6',
+      traslation: 'traduccion 6'
+    },
+    {
+      word:'algo 7',
+      traslation: 'traduccion 7'
+    },
+    {
+      word:'algo 8',
+      traslation: 'traduccion 8'
+    },
+    {
+      word:'algo 9',
+      traslation: 'traduccion 9'
+    },
+    {
+      word:'algo 10',
+      traslation: 'traduccion 10'
+    },
+    {
+      word:'algo 11',
+      traslation: 'traduccion 11'
+    },
+    {
+      word:'algo 1',
+      traslation: 'traduccion 1'
+    },
+    {
+      word:'algo 2',
+      traslation: 'traduccion 2'
+    },
+    {
+      word:'algo 3',
+      traslation: 'traduccion 3'
+    },
+    {
+      word:'algo 4',
+      traslation: 'traduccion 4'
+    },
+    {
+      word:'algo 5',
+      traslation: 'traduccion 5'
+    },
+    {
+      word:'algo 6',
+      traslation: 'traduccion 6'
+    },
+    {
+      word:'algo 7',
+      traslation: 'traduccion 7'
+    },
+    {
+      word:'algo 8',
+      traslation: 'traduccion 8'
+    },
+    {
+      word:'algo 9',
+      traslation: 'traduccion 9'
+    },
+    {
+      word:'algo 10',
+      traslation: 'traduccion 10'
+    },
+    {
+      word:'algo 11',
+      traslation: 'traduccion 11'
+    }
+  ]
 
+  comentario:IComentario = {
+    idCommentary: 0,
+    commentary: '',
+    idLesson: 0,
+    idUser: 0,
+    creationDate: undefined
+  }
 
-  constructor(private alertController: AlertController, public navController: NavController, private ServiceUsuario: UsuarioService) { }
+  constructor(private alertController: AlertController, 
+              public navController: NavController, 
+              private serviceUsuario: UserService,
+              private dicService: DictionaryService) { }
 
   ngOnInit() {
     try {
@@ -34,12 +141,28 @@ export class LessonDetailPage implements OnInit {
     } catch (error) {
       console.log('error al cargar leccion')
     }
+
+    this.comentario.idLesson = this.leccion.idLeccion;
+    this.comentario.idUser = 1; // de momento el usuario en duro, a cambiar al momento de iniciar con el manejo de servicios.
+
+    //this.alternativas.sort((a, b) => a.word < b.word ? -1 : a.word > b.word ? 1 : 0)
   }
 
+  aleatorio(inferior, superior) {
+    var numPosibilidades = superior - inferior;
+    var aleatorio = Math.random() * (numPosibilidades + 1);
+    aleatorio = Math.floor(aleatorio);
+    return inferior + aleatorio;
+}
 
+// Eventualmente hay que utilizar este servicio para cargar palabras aleatorias del back, que se utilizarán como alternativas.
+/*loadDictionary(){
+  this.dicService.loadDictionary().subscribe((resp:IDictionaryResponseModel) => {
+    this.alternativas = resp.data
+  })
+}*/
 
-
-  async AlertaLeccion() {
+  async alertaLeccion() {
 
     const alert = await this.alertController.create({
       header: '¿Esta seguro de enviar la lección?',
@@ -70,7 +193,7 @@ export class LessonDetailPage implements OnInit {
 
   }
 
-  async AlertaCancelar() {
+  async alertaCancelar() {
 
     const alert = await this.alertController.create({
       header: '¿Esta seguro que desea abandonar la lección?',
@@ -101,7 +224,7 @@ export class LessonDetailPage implements OnInit {
 
   }
 
-  async AlertaComentario() {
+  async alertaComentario() {
 
     const alert = await this.alertController.create({
       header: 'Ingrese su comentario:',
@@ -127,8 +250,9 @@ export class LessonDetailPage implements OnInit {
             id: 'confirm-button',
             handler: (alertData) => {
               console.log('OK');
-              var comentario = alertData.comentario
-              console.log(comentario);
+              this.comentario.commentary = alertData.comentario;
+              console.log(this.comentario.commentary);
+              this.guardarComentario()
             }
           }
         ]
@@ -140,16 +264,16 @@ export class LessonDetailPage implements OnInit {
   }
 
 
-  /*guardarComentario() {
-    this.ServiceUsuario.createComment(this.comentario).subscribe(resp => {
+  guardarComentario() {
+    this.serviceUsuario.createComment(this.comentario).subscribe(resp => {
       if (Number(resp.data) == 1) {
-        console.log('comentario ok')
+        alert('comentario ok')
       }
       else {
-        console.log('comentario no ok')
+        alert('comentario no ok')
       }
     })
-  }*/
+  }
 }
 
 

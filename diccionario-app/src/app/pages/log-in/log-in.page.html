@@ -17,22 +17,25 @@
   
     <ion-item class="ion-marging-top">
       <ion-label position="floating">E-mail *</ion-label>
-      <ion-input [(ngModel)]="clientEmailLogin"></ion-input>
+      <ion-input [(ngModel)]="clientEmail"></ion-input>
     </ion-item>
   
     <ion-item class="ion-marging-top">
       <ion-label position="floating">Contraseña *</ion-label>
-      <ion-input type="password" [(ngModel)]="clientPasswordLogin" ></ion-input>
+      <ion-input type="password" [(ngModel)]="clientPassword" ></ion-input>
     </ion-item>
     <ion-item>
       <ion-label>Recuerdame</ion-label>
-      <ion-checkbox checked="false"  [(ngModel)]="checkLogin" slot= start class="ion-margin-top" id="Recordar" position="floating"></ion-checkbox>
+      <ion-checkbox [(ngModel)]="checkLogin" slot= start class="ion-margin-top" id="Recordar" position="floating"></ion-checkbox>
     </ion-item>
     <ion-item >
-    <ion-button  class="ion-marging-top" class="arena" expand="block" (click)="validarUser(); checkLog()" type="submit">Ingresar</ion-button>
-    <ion-button [routerLink]="['/log-in']" class="ion-marging-top" class="arena" expand="block" type="submit">cancelar</ion-button>    <br>
+    <ion-button  class="ion-marging-top" class="arena" expand="block" (click)="validateInputs()" type="submit">Ingresar</ion-button>
+    <ion-button [routerLink]="['/register-form']" class="ion-marging-top" class="arena" expand="block" type="submit">Registrarme</ion-button>    
+    <br>
     
   </ion-item>
-    <ion-router-link class="color" class="ion-text-center">Recuperar contraseña</ion-router-link>
-    <ion-button  class="ion-marging-top" class="arena" expand="block" (click)="almacenarUsuario()" type="submit">Guardar usuario</ion-button>
+  <div class="container recPass">
+    <a class="color" class="ion-text-center">Recuperar contraseña</a>
+  </div>
+    
 </ion-content>
