@@ -14,7 +14,7 @@ import { UserService } from 'src/app/services/user/usuario.service';
   styleUrls: ['./log-in.page.scss'],
 })
 export class LogInPage implements OnInit {
-
+  
   clientEmail: string;
   clientPassword: string;
   checkLogin: boolean;
@@ -60,21 +60,20 @@ export class LogInPage implements OnInit {
         }else{
 
           this.logCorrecto = false;
-
         }
 
         this.wantedToBeRemembered();
 
       }).catch(e => {
 
-        alert("Error en llamada a bd local: " + e.message)
+        console.log("Error en llamada a bd local: " + e.message)
         this.logCorrecto = false
 
       })
 
     } catch (error) {
 
-      alert("Error en carga desde LOCAL: " + error.message)
+      console.log("Error en carga desde LOCAL: " + error.message)
       this.logCorrecto = false
 
     }
@@ -83,8 +82,9 @@ export class LogInPage implements OnInit {
 
   wantedToBeRemembered() {
     // si quiere ser recordado, con sus datos, navegamos directamente al home, enviando al usuario que tenemos en la bd local
-    this.toHome();
-
+    if (this.loggedUser.remember){
+      this.toHome();
+    }
   }
 
   // validaciones primarias para el input de log IN (correo / contraseña)
