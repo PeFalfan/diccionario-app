@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ILeccion } from 'src/app/interfaces/lesson-interface';
+import { UserService } from 'src/app/services/user/usuario.service';
 
 @Component({
   selector: 'app-document-download',
@@ -7,9 +9,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DocumentDownloadPage implements OnInit {
 
-  constructor() { }
+  leccionSeleccionada: string = '';
+  lessons: Array<ILeccion>
+
+
+  constructor(private serviceUsuario: UserService) { }
 
   ngOnInit() {
+    this.cargaLecciones();
+
+  }
+  cargaLecciones() {
+    console.log("Peter: servicio carga de lecciones")
+    this.serviceUsuario.loadLessons().subscribe(resp => {
+      this.lessons = resp.data
+      console.log("Peter: servicio carga de lecciones" + resp.data)
+    })
   }
 
 }

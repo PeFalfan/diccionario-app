@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertController, NavController } from '@ionic/angular';
+import { ILeccion } from 'src/app/interfaces/lesson-interface';
+import { UserService } from 'src/app/services/user/usuario.service';
 
 @Component({
   selector: 'app-document-load',
@@ -9,16 +11,21 @@ import { AlertController, NavController } from '@ionic/angular';
 export class DocumentLoadPage implements OnInit {
   documento: string = '';
   comentarioDocumento: string = '';
+  leccionSeleccionada: string = '';
+  lessons: Array<ILeccion>
 
-  constructor(private alertController: AlertController, public navController: NavController) { }
+  constructor(private alertController: AlertController, public navController: NavController, private serviceUsuario: UserService) { }
 
   ngOnInit() {
+
+    this.cargaLecciones();
 
   }
   validarDocumento() {
     var documentoCargado = this.documento;
+    var leccionSeleccionada = this.leccionSeleccionada
 
-    if (documentoCargado == '') {
+    if (documentoCargado == '' || leccionSeleccionada == '') {
       this.sinDocumento();
     }
     else {
@@ -58,9 +65,10 @@ export class DocumentLoadPage implements OnInit {
   }
 
   async sinDocumento() {
+    console.log(this.leccionSeleccionada)
     console.log('sin documento cargado')
     const alert = await this.alertController.create({
-      header: 'Por favor seleccione un documento para cargar',
+      header: 'Por favor seleccione un documento y una leccion para cargar',
       buttons:
         [
           {
@@ -92,4 +100,14 @@ export class DocumentLoadPage implements OnInit {
   cancelarDocumento() {
     this.navController.navigateRoot('home')
   }
+
+  cargaLecciones() {
+    console.log("Peter: servicio carga de lecciones")
+    this.serviceUsuario.loadLessons().subscribe(resp => {
+      this.lessons = resp.data
+      console.log("Peter: servicio carga de lecciones" + resp.data)
+    })
+  }
+
 }
+

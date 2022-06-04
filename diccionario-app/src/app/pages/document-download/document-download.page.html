@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
     <ion-item class="arena">
-    
+
       <ion-title class="ion-text-center">Diccionario Rapa Nui</ion-title>
       <ion-img style="width: 30px; height: 30px;" src="./assets/images/moai.png"></ion-img>
     </ion-item>
@@ -13,23 +13,19 @@
 
 <ion-content>
   <ion-item>
-    <ion-img src="./assets/images/rongo-rongo.jpg" expand="block" ></ion-img>
+    <ion-img src="./assets/images/rongo-rongo.jpg" expand="block"></ion-img>
   </ion-item>
   <ion-item>
-    <ion-label position="floating">Seleccione Lección</ion-label>
-    <ion-select okText="Seleccionar" cancelText="Volver">
-      <ion-select-option>Lección 1</ion-select-option>
-      <ion-select-option>Lección 2</ion-select-option>
-      <ion-select-option>Lección 3</ion-select-option>
-      <ion-select-option>Lección 4</ion-select-option>
-      <ion-select-option>Lección 5</ion-select-option>
-      <ion-select-option>Lección 6</ion-select-option>
+    <ion-label>Seleccione una lección</ion-label>
+    <ion-select [(ngModel)]="leccionSeleccionada">
+      <ion-select-option *ngFor="let less of lessons">{{less.tituloLeccion}}
+      </ion-select-option>
     </ion-select>
   </ion-item>
   <br>
   <ion-item>
     <ion-label position="floating">Material de apoyo</ion-label>
-    <ion-select  okText="Seleccionar" cancelText="Volver">
+    <ion-select okText="Seleccionar" cancelText="Volver">
       <ion-select-option>
         Presentación</ion-select-option>
       <ion-select-option>Canción semanal</ion-select-option>
@@ -37,6 +33,6 @@
     </ion-select>
   </ion-item>
   <ion-item>
-  <ion-icon name="cloud-download" slot="end"></ion-icon>
-</ion-item>
+    <ion-icon name="cloud-download" slot="end"></ion-icon>
+  </ion-item>
 </ion-content>
