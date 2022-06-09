@@ -26,11 +26,11 @@
   </ion-item>
   <br>
   <ion-label class="new-word-label">Audio de pronunciación</ion-label>
-  <ion-input type="file" name="filename" (change)="wavToBase64($event)"></ion-input>
+  <ion-input type="file" name="filename" [(ngModel)]="audioRapa"></ion-input>
   <br>
-  <ion-button expand="block" (click)="limpiarFormulario()">Limpiar Formulario</ion-button>
+  <ion-button expand="block" class="arena" (click)="limpiarFormulario()">Limpiar Formulario</ion-button>
   <br>
-  <ion-button class="lesson_button" (click)='cancelarPalabra()'>Cancelar</ion-button>
-  <ion-button class="lesson_button" (click)="guardarPalabra()">Guardar</ion-button>
+  <ion-button class="lesson_button arena" (click)='cancelarPalabra()'>Cancelar</ion-button>
+  <ion-button class="lesson_button arena" (click)="guardarPalabra()">Guardar</ion-button>
 
 </ion-content>
