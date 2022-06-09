@@ -10,6 +10,12 @@ import { DatabaseService } from 'src/app/services/database/database.service';
 })
 export class HomePage implements OnInit {
 
+  slideOpts = {
+    initialSlide: 1,
+    speed: 400, 
+    autoplay: true
+  };
+
   inSessionUser: IUser = {
     clientName: '',
     clientLastNames: '',
@@ -37,7 +43,7 @@ export class HomePage implements OnInit {
     "⠨⡂⡀⢑⢕⡅⠂⠄⠉⠛⠻⠿⢿⣿⣿⣿⣿⣿⣿⣿⣿⡿⢋⢔⢕⢕⣿⣿⠠⠈\n" +
     "⠄⠪⣂⠁⢕⠆⠄⠂⠄⠁⡀⠂⡀⠄⢈⠉⢍⢛⢛⢛⢋⢔⢕⢕⢕⣽⣿⣿⠠⠈\n"
 
-  control: string = "Control";
+ 
 
   constructor(private rutaActiva: ActivatedRoute,
     private dbService: DatabaseService) {
