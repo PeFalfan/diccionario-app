@@ -35,4 +35,8 @@ export class UserService {
     let urlToHit = this.url + "/logIn";
     return this.http.post<ILogInResponseModel>(urlToHit,loginDic);
   }
+
+  getSummary():Observable<IResponseModel>{
+    return this.http.get<IResponseModel>(this.url+"/getResume");
+  }
 }
