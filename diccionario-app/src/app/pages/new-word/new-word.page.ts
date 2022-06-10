@@ -37,7 +37,6 @@ export class NewWordPage implements OnInit {
       const res: string = reader.result as string
       
       this.newTerm.pronunciation = res.slice(22);
-      alert("base64?"+this.newTerm.pronunciation)
     };
     reader.onerror = (error) => {
       alert(error);

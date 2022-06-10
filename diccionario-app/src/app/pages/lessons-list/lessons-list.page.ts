@@ -62,7 +62,7 @@ export class LessonsListPage implements OnInit {
 
   cargarLeccion(lesson:ILeccion) {
     this.lastApproved();
-    if(this.lastLessonApproved +1 >= lesson.idLeccion){
+    if(this.lastLessonApproved >= lesson.idLeccion){
       this.lessons.forEach(element => {
         if (element.idLeccion == lesson.idLeccion) {
           this.leccionAEnviar = element

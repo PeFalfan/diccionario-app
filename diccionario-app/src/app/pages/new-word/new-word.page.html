@@ -26,7 +26,7 @@
   </ion-item>
   <br>
   <ion-label class="new-word-label">Audio de pronunciación</ion-label>
-  <ion-input type="file" name="filename" [(ngModel)]="audioRapa"></ion-input>
+  <ion-input type="file" name="filename" (change)="wavToBase64($event)"></ion-input>
   <br>
   <ion-button expand="block" class="arena" (click)="limpiarFormulario()">Limpiar Formulario</ion-button>
   <br>
