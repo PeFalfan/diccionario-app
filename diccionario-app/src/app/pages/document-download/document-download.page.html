@@ -17,22 +17,14 @@
   </ion-item>
   <ion-item>
     <ion-label>Seleccione una lección</ion-label>
-    <ion-select [(ngModel)]="leccionSeleccionada">
-      <ion-select-option *ngFor="let less of lessons">{{less.tituloLeccion}}
+    <ion-select [(ngModel)]="leccionSeleccionada" (ionChange)="cargaDocumentos()">
+      <ion-select-option [value]="less" *ngFor="let less of lessons">{{less.tituloLeccion}}
       </ion-select-option>
     </ion-select>
   </ion-item>
   <br>
-  <ion-item>
-    <ion-label position="floating">Material de apoyo</ion-label>
-    <ion-select okText="Seleccionar" cancelText="Volver">
-      <ion-select-option>
-        Presentación</ion-select-option>
-      <ion-select-option>Canción semanal</ion-select-option>
-      <ion-select-option>Encargo semanal</ion-select-option>
-    </ion-select>
-  </ion-item>
-  <ion-item>
+  <ion-item *ngFor="let doc of documents" (click)="onClickDownloadDoc(doc)">
     <ion-icon name="cloud-download" slot="end"></ion-icon>
+    {{doc.nameDocument}} 
   </ion-item>
 </ion-content>
