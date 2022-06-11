@@ -18,7 +18,22 @@ clientEmail: string="";
 clientPassword: string= "";
 clientRepeatPassword: string= "";
 
-usuario: IUser;
+errorCorreo : boolean = false;
+errorePass : boolean = false
+errorFono : boolean = false;
+
+
+
+usuario: IUser =  {
+  clientName: '',
+  clientLastNames: '',
+  clientPhone: '',
+  idUser: 0,
+  clientEmail: '',
+  clientPassword: '',
+  userType: 2,
+  remember: false
+}
 
   constructor(public navctrl: NavController, private servicioUsuario: UserService) { }
 
@@ -31,34 +46,31 @@ usuario: IUser;
     var correo = this.clientEmail
     if (correo.indexOf('@duocuc.cl') >= 0) {
       console.log('correo ok')
+      this.errorCorreo = false
     }
     else {
+      this.errorCorreo = true
       console.log('correo no ok')
     }
   }
 
   validarCampos(){
-    var nombre = this.clientName
-    var apellido= this. clientLastNames
-    var fono= this.clientPhone
-    var correo= this.clientEmail
-    var contrasena= this.clientPassword
-    var contrasena2= this.clientRepeatPassword
 
-    //objeto
-    this.usuario.clientEmail= correo 
-    this.usuario.clientLastNames= apellido
-    this.usuario.clientName= nombre
-    this.usuario.clientPassword= contrasena
-    this.usuario.clientPhone= fono
+
     
     if(
-      nombre != "" && apellido != "" && fono !=""
-      && correo != "" && contrasena != "" && contrasena2 != ""
+      this.clientName != "" && this.clientLastNames != "" && this.clientPhone !=""
+      && this.clientEmail != "" && this.clientPassword != "" && this.clientRepeatPassword != ""
     ){
-      console.log("campos ok")
+          //objeto
+    this.usuario.clientEmail= this.clientEmail 
+    this.usuario.clientLastNames= this.clientLastNames
+    this.usuario.clientName= this.clientName
+    this.usuario.clientPassword= this.clientPassword
+    this.usuario.clientPhone= this.clientPhone
+      alert("campos ok")
     }else{
-      console.log("campos vacios")
+      alert("campos vacios")
     }
 
   }
@@ -67,8 +79,11 @@ usuario: IUser;
     var fono= this.clientPhone
     if(fono.length == 12){
       console.log("fono ok")
+      this.errorFono = false
     }else{
       console.log("fono no ok")
+
+      this.errorFono = true
     }
   }
   
@@ -76,35 +91,55 @@ usuario: IUser;
 validarContrasena(){
   var contrasena= this.clientPassword
   console.log("texto"+contrasena)
-  var regex = /^(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/
+  var regex = /^(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{3,}$/
   if (regex.test(contrasena)) {
         console.log("contraseña ok")
+        this.errorePass = false
       }
   else {
+    this.errorePass = true
         console.log("contraseña no ok")
       }
   }
 
-
  validarContrasena2(){
    var contrasena= this.clientPassword
    var contrasena2= this.clientRepeatPassword
-   if(contrasena===contrasena2){
+   if ( contrasena === contrasena2 ){
      console.log("contrasena iguales")
    }else{
-     console.log("contrasena distintas")
+     alert("contrasena distintas")
    }
  }
 
  validarRegistro(){
-  this.servicioUsuario.createUsuario(this.usuario).subscribe(resp => {
-    if (Number (resp.data)== 1){
-      this.navctrl.navigateRoot("log-in")
-    }else{
-      console.log("registro no ok")
-    }
-  } )
+
+
+    this.servicioUsuario.createUsuario(this.usuario).subscribe( resp => {
+
+      alert("usuario: " + this.usuario.clientName)
+
+      if ( Number(resp.data) == 1 ){
+  
+        this.navctrl.navigateRoot("log-in")
+  
+      } else {
+        alert("registro no ok")
+      }
+    } )
  }
- 
+
+ ejecutarPorqueNoSeMeOcurreOtroNombre(){
+
+  this.validarCampos(); 
+  this.validarContrasena2();
+
+  if (this.errorCorreo == false && this.errorFono == false && this.errorePass == false){
+    alert("Happy Path")
+
+    this.validarRegistro()
+  }
+
+ }
 
 }

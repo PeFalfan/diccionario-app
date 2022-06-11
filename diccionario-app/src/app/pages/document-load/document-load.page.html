@@ -14,20 +14,23 @@
 </ion-header>
 
 <ion-content>
-  <br>
-  <ion-item>
-    <ion-label>Seleccione un archivo:</ion-label>
-    <ion-input type="file" [(ngModel)]="documento"></ion-input>
-  </ion-item>
-  <br>
+
   <ion-item>
     <ion-label>Seleccione una lección</ion-label>
     <ion-select [(ngModel)]="leccionSeleccionada">
-      <ion-select-option *ngFor="let less of lessons">{{less.tituloLeccion}}
+      <ion-select-option [value]="less" *ngFor="let less of lessons">{{less.tituloLeccion}}
       </ion-select-option>
     </ion-select>
   </ion-item>
   <br>
+  
+  <br>
+  <ion-item>
+    <ion-label>Seleccione un archivo:</ion-label>
+    <ion-input type="file" (change)="toBase64($event)"></ion-input>
+  </ion-item>
+  <br>
+
   <!--<ion-item>
     <ion-textarea placeholder="Comentario:" class="document-text" [(ngModel)]="comentarioDocumento"></ion-textarea>
   </ion-item>-->
