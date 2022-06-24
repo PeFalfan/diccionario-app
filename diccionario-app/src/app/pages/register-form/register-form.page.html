@@ -18,7 +18,7 @@
 
   <ion-item class="ion-marging-top">
     <ion-label position="floating">Nombre *</ion-label>
-    <ion-input [(ngModel)]="clientName"></ion-input>
+    <ion-input [(ngModel)]="clientName" ></ion-input>
   </ion-item>
 
   <ion-item class="ion-marging-top">
@@ -28,18 +28,18 @@
 
   <ion-item class="ion-marging-top">
     <ion-label position="floating">Teléfono *</ion-label>
-    <ion-input [(ngModel)]="clientPhone" placeholder="+56911111111"></ion-input>
+    <ion-input [(ngModel)]="clientPhone" placeholder="+56911111111" (change)="validarFono()"></ion-input>
   </ion-item>
 
   
   <ion-item class="ion-marging-top">
     <ion-label position="floating">E-mail *</ion-label>
-    <ion-input type="email" [(ngModel)]="clientEmail"></ion-input>
+    <ion-input type="email" [(ngModel)]="clientEmail" (change)="validarCorreo()"></ion-input>
   </ion-item>
 
   <ion-item class="ion-marging-top">
     <ion-label position="floating">Contraseña *</ion-label>
-    <ion-input [(ngModel)]="clientPassword"></ion-input>
+    <ion-input [(ngModel)]="clientPassword" (change)="validarContrasena()"> </ion-input>
   </ion-item>
 
   <ion-item class="ion-marging-top">
@@ -47,6 +47,6 @@
     <ion-input [(ngModel)]="clientRepeatPassword"></ion-input>
   </ion-item>
 
-  <ion-button class="arena" expand="block" (click)="validarCorreo(); validarCampos(); validarFono(); validarContrasena2();validarContrasena()"  type="submit">Registrar</ion-button>
+  <ion-button class="arena" expand="block" (click)="ejecutarPorqueNoSeMeOcurreOtroNombre()"  type="submit">Registrar</ion-button>
   
 </ion-content>

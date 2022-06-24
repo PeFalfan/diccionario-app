@@ -27,12 +27,26 @@ export class UserService {
   }
 
   createUsuario(usuarioDic:IUser):Observable<IResponseModel>{
-    let urlToHit = this.url + "/createClient";
-    return this.http.post<IResponseModel>(urlToHit,usuarioDic);
+
+    alert("Peter: " + usuarioDic.clientName)
+
+    console.log("Peter: " + usuarioDic.clientName)
+
+    
+
+    let urlToHit = this.url + "/createUser";
+
+    console.log("Peter: " + urlToHit)
+    alert("Peter: " + urlToHit)
+    return this.http.post<IResponseModel>(urlToHit, usuarioDic);
   }
 
   login(loginDic:ILogin):Observable<ILogInResponseModel>{
     let urlToHit = this.url + "/logIn";
     return this.http.post<ILogInResponseModel>(urlToHit,loginDic);
+  }
+
+  getSummary():Observable<IResponseModel>{
+    return this.http.get<IResponseModel>(this.url+"/getResume");
   }
 }
