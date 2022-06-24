@@ -1,23 +1,38 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>dictionary</ion-title>
+    <ion-item class="arena">
+      <ion-buttons slot="start">
+        <ion-menu-button autoHide="false"></ion-menu-button>
+      </ion-buttons>
+      <ion-title class="ion-text-center">Diccionario</ion-title>
+      <ion-img style="width: 30px; height: 30px;" slot="end" src="./assets/images/moai.png"></ion-img>
+    </ion-item>
   </ion-toolbar>
+
 </ion-header>
 
 <ion-content>
 
   <ion-list>
+  
     <ion-item *ngFor="let termino of dictionary.terms">
       <ion-avatar slot="start">
-        <img src="../../../assets/images/lesson.png" alt="diccionario" />
+        <img src="../../../assets/images/diccionario.png" alt="diccionario" />
       </ion-avatar>
+  
       <ion-label>
         <h2>Termino: {{ termino.word }}</h2>
         <h2>Significado: {{termino.traslation}}</h2>
-        <ion-button *ngIf="termino.pronunciation != null" color="success" (click)="playAudio(termino.pronunciation)">play</ion-button>
       </ion-label>
-      
+        <ion-button *ngIf="termino.pronunciation != null" color="secondary"
+          (click)="playAudio(termino.pronunciation)">
+          <ion-icon name="volume-medium-outline" size="large"></ion-icon>
+          </ion-button>
     </ion-item>
+    
   </ion-list>
-
+  <br>
+  <br>
+  <br>
 </ion-content>
+
