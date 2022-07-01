@@ -18,7 +18,8 @@ export class LessonsListPage implements OnInit {
   pregunta: Array<IPregunta>
   lessons: Array<ILeccion>
   leccionAEnviar: ILeccion
-  lastLessonApproved:number
+  lastLessonApproved:number = 0;
+  percent:number = 0;
   inSessionUser : IUser = {
     clientName: '',
     clientLastNames: '',
@@ -41,6 +42,8 @@ export class LessonsListPage implements OnInit {
 
     this.loadUser();
 
+    
+
   }
 
   loadUser(){
@@ -55,9 +58,10 @@ export class LessonsListPage implements OnInit {
         this.lastLessonApproved = les.idLeccion
       }
     })
-    if (this.lastLessonApproved == undefined){
+    if (this.lastLessonApproved == undefined || this.lastLessonApproved == 0){
       this.lastLessonApproved = 1;
     }
+
   }
 
   cargarLeccion(lesson:ILeccion) {
