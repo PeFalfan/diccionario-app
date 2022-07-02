@@ -39,12 +39,12 @@
 
   <ion-item class="ion-marging-top">
     <ion-label position="floating">Contraseña *</ion-label>
-    <ion-input [(ngModel)]="clientPassword" (change)="validarContrasena()"> </ion-input>
+    <ion-input type="password" [(ngModel)]="clientPassword"> </ion-input>
   </ion-item>
 
   <ion-item class="ion-marging-top">
     <ion-label position="floating">Repetir contraseña *</ion-label>
-    <ion-input [(ngModel)]="clientRepeatPassword"></ion-input>
+    <ion-input type="password" [(ngModel)]="clientRepeatPassword"></ion-input>
   </ion-item>
 
   <ion-button class="arena" expand="block" (click)="ejecutarPorqueNoSeMeOcurreOtroNombre()"  type="submit">Registrar</ion-button>

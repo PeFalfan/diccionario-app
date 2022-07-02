@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController } from '@ionic/angular';
+import { AlertController, NavController } from '@ionic/angular';
 
 import { IUser } from 'src/app/interfaces/user-interfaces';
 import { UserService } from 'src/app/services/user/usuario.service';
@@ -11,40 +11,39 @@ import { UserService } from 'src/app/services/user/usuario.service';
 })
 export class RegisterFormPage implements OnInit {
 
-clientName: string= "";
-clientLastNames: string= "";
-clientPhone: string= "";
-clientEmail: string="";
-clientPassword: string= "";
-clientRepeatPassword: string= "";
+  clientName: string = "";
+  clientLastNames: string = "";
+  clientPhone: string = "";
+  clientEmail: string = "";
+  clientPassword: string = "";
+  clientRepeatPassword: string = "";
 
-errorCorreo : boolean = false;
-errorePass : boolean = false
-errorFono : boolean = false;
+  errorCorreo: boolean = false;
+  errorPass: boolean = false
+  errorFono: boolean = false;
 
+  usuario: IUser = {
+    clientName: '',
+    clientLastNames: '',
+    clientPhone: '',
+    idUser: 0,
+    clientEmail: '',
+    clientPassword: '',
+    userType: 2,
+    remember: false
+  }
 
-
-usuario: IUser =  {
-  clientName: '',
-  clientLastNames: '',
-  clientPhone: '',
-  idUser: 0,
-  clientEmail: '',
-  clientPassword: '',
-  userType: 2,
-  remember: false
-}
-
-  constructor(public navctrl: NavController, private servicioUsuario: UserService) { }
+  constructor(
+    public navctrl: NavController,
+    private servicioUsuario: UserService,
+    private alertController: AlertController) { }
 
   ngOnInit() {
   }
 
-
-
-  validarCorreo(){
+  validarCorreo() {
     var correo = this.clientEmail
-    if (correo.indexOf('@duocuc.cl') >= 0) {
+    if (correo.indexOf('@') >= 0) {
       console.log('correo ok')
       this.errorCorreo = false
     }
@@ -54,92 +53,206 @@ usuario: IUser =  {
     }
   }
 
-  validarCampos(){
+  validarCampos() {
 
-
-    
-    if(
-      this.clientName != "" && this.clientLastNames != "" && this.clientPhone !=""
+    if (
+      this.clientName != "" && this.clientLastNames != "" && this.clientPhone != ""
       && this.clientEmail != "" && this.clientPassword != "" && this.clientRepeatPassword != ""
-    ){
+    ) {
+
+      this.validarCorreo();
+
+      if (this.errorCorreo) {
+
+        this.alertaErrorCorreo();
+
+      } else {
+
+        this.validarContrasena2();
+
+        if ( this.errorPass){
+
+          this.alertaErrorPass();
+
+        } else {
+          
           //objeto
-    this.usuario.clientEmail= this.clientEmail 
-    this.usuario.clientLastNames= this.clientLastNames
-    this.usuario.clientName= this.clientName
-    this.usuario.clientPassword= this.clientPassword
-    this.usuario.clientPhone= this.clientPhone
-      alert("campos ok")
-    }else{
-      alert("campos vacios")
+          this.usuario.clientName = this.clientName
+          this.usuario.clientLastNames = this.clientLastNames
+          this.usuario.clientPhone = this.clientPhone
+          this.usuario.clientEmail = this.clientEmail
+          this.usuario.clientPassword = this.clientPassword
+          this.usuario.userType = 2;
+          
+        }
+
+      }
+
+    } else {
+
+      this.alertaErrorCampos()
+
     }
 
   }
 
-  validarFono(){
-    var fono= this.clientPhone
-    if(fono.length == 12){
+  async alertaErrorCorreo() {
+    const alert = await this.alertController.create({
+      header: 'Error en formulario',
+      message: 'Correo no válido',
+      buttons:
+        [
+          {
+            text: 'OK',
+            cssClass: 'secondary',
+            id: 'confirm-button',
+            handler: () => {
+              console.log('Error');
+            }
+          }
+        ]
+    });
+    await alert.present();
+    const { role } = await alert.onDidDismiss();
+    console.log('onDidDismiss resolved with role', role);
+  }
+
+  async alertaErrorCampos() {
+    const alert = await this.alertController.create({
+      header: 'Error en formulario',
+      message: 'Favor completar todos los campos',
+      buttons:
+        [
+          {
+            text: 'OK',
+            cssClass: 'secondary',
+            id: 'confirm-button',
+            handler: () => {
+              console.log('Error');
+            }
+          }
+        ]
+    });
+    await alert.present();
+    const { role } = await alert.onDidDismiss();
+    console.log('onDidDismiss resolved with role', role);
+  }
+
+  async alertaErrorPass() {
+    const alert = await this.alertController.create({
+      header: 'Error en formulario',
+      message: 'Favor validar contraseñas',
+      buttons:
+        [
+          {
+            text: 'OK',
+            cssClass: 'secondary',
+            id: 'confirm-button',
+            handler: () => {
+              console.log('Error');
+            }
+          }
+        ]
+    });
+    await alert.present();
+    const { role } = await alert.onDidDismiss();
+    console.log('onDidDismiss resolved with role', role);
+  }
+
+  validarFono() {
+    var fono = this.clientPhone
+    if (fono.length == 12) {
       console.log("fono ok")
       this.errorFono = false
-    }else{
+    } else {
       console.log("fono no ok")
 
       this.errorFono = true
     }
   }
-  
 
-validarContrasena(){
-  var contrasena= this.clientPassword
-  console.log("texto"+contrasena)
-  var regex = /^(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{3,}$/
-  if (regex.test(contrasena)) {
-        console.log("contraseña ok")
-        this.errorePass = false
-      }
-  else {
-    this.errorePass = true
-        console.log("contraseña no ok")
-      }
+  validarContrasena2() {
+    var contrasena = this.clientPassword
+    var contrasena2 = this.clientRepeatPassword
+    if (contrasena === contrasena2) {
+      console.log("contrasena iguales")
+      this.errorPass == false;
+    } else {
+      this.errorPass = true;
+    }
   }
 
- validarContrasena2(){
-   var contrasena= this.clientPassword
-   var contrasena2= this.clientRepeatPassword
-   if ( contrasena === contrasena2 ){
-     console.log("contrasena iguales")
-   }else{
-     alert("contrasena distintas")
-   }
- }
+  async alertaRegistroOK() {
+    const alert = await this.alertController.create({
+      header: 'Registro',
+      message: 'Usuario registrado correctamente!',
+      buttons:
+        [
+          {
+            text: 'OK',
+            cssClass: 'secondary',
+            id: 'confirm-button',
+            handler: () => {
+              this.navctrl.navigateRoot("log-in")
+            }
+          }
+        ]
+    });
+    await alert.present();
+    const { role } = await alert.onDidDismiss();
+    console.log('onDidDismiss resolved with role', role);
+  }
 
- validarRegistro(){
+  validarRegistro() {
 
 
-    this.servicioUsuario.createUsuario(this.usuario).subscribe( resp => {
+    this.servicioUsuario.createUsuario(this.usuario).subscribe(resp => {
 
-      alert("usuario: " + this.usuario.clientName)
+      if (Number(resp.data) == 1) {
 
-      if ( Number(resp.data) == 1 ){
-  
-        this.navctrl.navigateRoot("log-in")
-  
+        this.alertaRegistroOK();
+
       } else {
-        alert("registro no ok")
+
+        this.alertaErrorServicio();
+
       }
-    } )
- }
-
- ejecutarPorqueNoSeMeOcurreOtroNombre(){
-
-  this.validarCampos(); 
-  this.validarContrasena2();
-
-  if (this.errorCorreo == false && this.errorFono == false && this.errorePass == false){
-    alert("Happy Path")
-
-    this.validarRegistro()
+    })
   }
 
- }
+  ejecutarPorqueNoSeMeOcurreOtroNombre() {
+
+    this.validarCampos();
+
+    if (this.errorCorreo == false && this.errorFono == false) {
+
+      this.validarRegistro()
+
+    }
+
+  }
+
+  async alertaErrorServicio() {
+    const alert = await this.alertController.create({
+      header: 'Error al registrar',
+      message: 'Error en servicio de registro',
+      buttons:
+        [
+          {
+            text: 'OK',
+            cssClass: 'secondary',
+            id: 'confirm-button',
+            handler: () => {
+              console.log('Error');
+            }
+          }
+        ]
+    });
+    await alert.present();
+    const { role } = await alert.onDidDismiss();
+    console.log('onDidDismiss resolved with role', role);
+  }
 
 }
+
+

@@ -14,7 +14,9 @@ export class DictionaryPage implements OnInit {
     terms: []
   }
 
-  filteredTerms: Array<ITerm> = []
+  searched:boolean = false;
+
+  filteredTerms: Array<ITerm> = [] // => TODO: USAR PARA LISTADO DE PALABRAS EN BARRA DE BUSQUEDA
 
   aTerms: Array<ITerm> = []
   bTerms: Array<ITerm> = []
@@ -48,7 +50,6 @@ export class DictionaryPage implements OnInit {
   ngOnInit() {
     this.loadDictionary();
 
-
   }
 
   loadDictionary() {
@@ -60,11 +61,6 @@ export class DictionaryPage implements OnInit {
   }
 
   groupByFirstCharacter() {
-
-    console.log("Termino: ")
-
-    console.log("caracter: " + this.dictionary.terms[0].word.charAt(0))
-
 
     this.dictionary.terms.forEach(element => {
       switch (element.word.charAt(0).toLowerCase()) {
@@ -201,6 +197,21 @@ export class DictionaryPage implements OnInit {
           break;
       }
     })
+
+  }
+
+  searchBarChange($event){
+    console.log("Click " + $event.target.value)
+
+    if ($event.target.value == "" || $event.target.value == undefined || $event.target.value == null){
+      this.searched = false;
+      this.filteredTerms = this.dictionary.terms
+    } else {
+      this.searched = true;
+      this.filteredTerms.filter(item => {
+        return item.word.toLowerCase().indexOf($event.target.value.toLowerCase()) > -1;
+      });
+    }
 
   }
 

@@ -1,8 +1,8 @@
-import { Component, ComponentFactoryResolver, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { ILogin } from 'src/app/interfaces/login-interfaces';
-import { ILogInResponseModel, IResponseModel } from 'src/app/interfaces/response-interfaces';
+import { ILogInResponseModel } from 'src/app/interfaces/response-interfaces';
 import { IUser } from 'src/app/interfaces/user-interfaces';
 import { DatabaseService } from 'src/app/services/database/database.service';
 import { UserService } from 'src/app/services/user/usuario.service';
@@ -14,7 +14,7 @@ import { UserService } from 'src/app/services/user/usuario.service';
   styleUrls: ['./log-in.page.scss'],
 })
 export class LogInPage implements OnInit {
-  
+
   clientEmail: string;
   clientPassword: string;
   checkLogin: boolean;
@@ -53,11 +53,11 @@ export class LogInPage implements OnInit {
         let usuario: IUser = resp;
         this.loggedUser = usuario;
 
-        if(resp != undefined && resp != null){
+        if (resp != undefined && resp != null) {
 
           this.logCorrecto = true;
 
-        }else{
+        } else {
 
           this.logCorrecto = false;
         }
@@ -82,7 +82,7 @@ export class LogInPage implements OnInit {
 
   wantedToBeRemembered() {
     // si quiere ser recordado, con sus datos, navegamos directamente al home, enviando al usuario que tenemos en la bd local
-    if (this.loggedUser.remember){
+    if (this.loggedUser.remember) {
       this.toHome();
     }
   }
@@ -177,7 +177,7 @@ export class LogInPage implements OnInit {
   // navegacion a HOME
   toHome() {
 
-    if (this.logCorrecto){
+    if (this.logCorrecto) {
       this.router.navigate(['home'], {
         state: {
           data: this.loggedUser

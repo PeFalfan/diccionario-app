@@ -13,7 +13,41 @@
 
 <ion-content>
 
-  <ion-list>
+  <!-- Barra de búsqueda -->
+
+  <ion-searchbar animated="true" (ionChange)="searchBarChange($event)" showCancelButton="always"></ion-searchbar>
+
+  <!-- palabras filtradas -->
+
+  <ion-list *ngIf="searched == true">
+
+    <div class="container" *ngFor="let termino of filteredTerms">
+
+      <ion-item>
+
+        <ion-avatar slot="start">
+          <img src="../../../assets/images/diccionario.png" alt="diccionario" />
+        </ion-avatar>
+
+        <ion-label>
+          <h2>Termino: {{ termino.word }}</h2>
+          <h2>Significado: {{termino.traslation}}</h2>
+        </ion-label>
+
+        <ion-button *ngIf="termino.pronunciation != null" color="secondary"
+          (click)="playAudio(termino.pronunciation)">
+          <ion-icon name="volume-medium-outline" size="large"></ion-icon>
+        </ion-button>
+
+      </ion-item>
+
+    </div>
+
+  </ion-list>
+
+  <!-- Agrupaciones de palabras -->
+
+  <ion-list *ngIf="searched == false">
 
     <ion-item *ngIf="aTerms.length > 0">
       <ion-label>A</ion-label>

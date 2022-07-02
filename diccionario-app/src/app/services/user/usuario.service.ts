@@ -27,17 +27,7 @@ export class UserService {
   }
 
   createUsuario(usuarioDic:IUser):Observable<IResponseModel>{
-
-    alert("Peter: " + usuarioDic.clientName)
-
-    console.log("Peter: " + usuarioDic.clientName)
-
-    
-
     let urlToHit = this.url + "/createUser";
-
-    console.log("Peter: " + urlToHit)
-    alert("Peter: " + urlToHit)
     return this.http.post<IResponseModel>(urlToHit, usuarioDic);
   }
 
