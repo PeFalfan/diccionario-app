@@ -124,6 +124,8 @@ export class LessonsListPage implements OnInit {
   cargaLecciones() {
     this.serviceUsuario.loadLessons().subscribe(resp => {
       this.lessons = resp.data
+
+      //this.lessons.sort((a,b) => a.idLeccion - b.idLeccion)
     })
   }
 

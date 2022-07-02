@@ -14,7 +14,7 @@
   <ion-item>
     <ion-list>
       <ion-list-header style="position:sticky">
-        <ion-title>Lecciones aprobadas: {{ lastLessonApproved }} / 7: {{ percent * 100}}%</ion-title>
+        <ion-title>Lecciones aprobadas: {{ lastLessonApproved }} / 7: {{ (percent * 100).toFixed(2)}}%</ion-title>
       </ion-list-header>
       <ion-progress-bar value="{{percent}}"></ion-progress-bar>
     </ion-list>

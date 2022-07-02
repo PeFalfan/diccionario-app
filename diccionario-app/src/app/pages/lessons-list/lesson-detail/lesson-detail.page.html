@@ -10,39 +10,1064 @@
   </ion-toolbar>
 </ion-header>
 <ion-content>
-  <ion-list>
-    <ion-item *ngFor="let pregunta of preguntas">
+
+  <!-- Lista de preguntas lecc 1 -->
+  <ion-list *ngIf="leccion.idLeccion == 1">
+
+    <!-- pregunta 1 -->
+    <ion-item>
       <ion-col>
         <ion-col size="12">
-          <h4>{{pregunta.textoPregunta}}</h4>
+          <h4> ¿Que significa? : 'Moana' </h4>
         </ion-col>
         <ion-col>
-          <ion-radio-group>
+          <ion-radio-group [(ngModel)]="lec1preg1selectedResponse">
             <ion-item>
-              <ion-label>{{pregunta.palabraDiccionario}}
-              </ion-label>
-              <ion-radio color="success" slot="start" value="1"></ion-radio>
+              <ion-label>bailar</ion-label>
+              <ion-radio color="success" slot="start" value="bailar"></ion-radio>
             </ion-item>
             <ion-item>
-              <ion-label>{{alternativas[pregunta.idPregunta-1].word}}</ion-label>
-              <ion-radio color="success" slot="start" value="2"></ion-radio>
+              <ion-label>blanco</ion-label>
+              <ion-radio color="success" slot="start" value="blanco"></ion-radio>
             </ion-item>
             <ion-item>
-              <ion-label>{{alternativas[pregunta.idPregunta].word}}</ion-label>
-              <ion-radio color="success" slot="start" value="3"></ion-radio>
+              <ion-label>Gracias</ion-label>
+              <ion-radio color="success" slot="start" value="Gracias"></ion-radio>
             </ion-item>
             <ion-item>
-              <ion-label>{{alternativas[pregunta.idPregunta + 1].word}}</ion-label>
-              <ion-radio color="success" slot="start" value="4"></ion-radio>
+              <ion-label>Chico</ion-label>
+              <ion-radio color="success" slot="start" value="Chico"></ion-radio>
             </ion-item>
           </ion-radio-group>
         </ion-col>
       </ion-col>
     </ion-item>
+
+    <!-- pregunta 2 -->
+    <ion-item>
+      <ion-col>
+        <ion-col size="12">
+          <h4> ¿Que significa? : 'Iorana' </h4>
+        </ion-col>
+        <ion-col>
+          <ion-radio-group [(ngModel)]="lec1preg2selectedResponse">
+            <ion-item>
+              <ion-label>bailar</ion-label>
+              <ion-radio color="success" slot="start" value="bailar"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label>hija</ion-label>
+              <ion-radio color="success" slot="start" value="hija"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label>Hola/Adios</ion-label>
+              <ion-radio color="success" slot="start" value="Hola/Adios"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label>novia</ion-label>
+              <ion-radio color="success" slot="start" value="novia"></ion-radio>
+            </ion-item>
+          </ion-radio-group>
+        </ion-col>
+      </ion-col>
+    </ion-item>
+
+    <!-- pregunta 3 -->
+    <ion-item>
+      <ion-col>
+        <ion-col size="12">
+          <h4> ¿Que significa? : 'Iti iti' </h4>
+        </ion-col>
+        <ion-col>
+          <ion-radio-group [(ngModel)]="lec1preg3selectedResponse">
+            <ion-item>
+              <ion-label>Correr</ion-label>
+              <ion-radio color="success" slot="start" value="bailar"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label>Peleador</ion-label>
+              <ion-radio color="success" slot="start" value="Peleador"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label>Trabajador</ion-label>
+              <ion-radio color="success" slot="start" value="Trabajador"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label>Chico</ion-label>
+              <ion-radio color="success" slot="start" value="Chico"></ion-radio>
+            </ion-item>
+          </ion-radio-group>
+        </ion-col>
+      </ion-col>
+    </ion-item>
+
+    <!-- pregunta 4 -->
+    <!-- <ion-item>
+      <ion-col>
+        <ion-col size="12">
+          <h4> ¿Que significa? : 'Moana' </h4>
+        </ion-col>
+        <ion-col>
+          <ion-radio-group [(ngModel)]="lec1preg1selectedResponse">
+            <ion-item>
+              <ion-label>bailar</ion-label>
+              <ion-radio color="success" slot="start" value="bailar"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label>blanco</ion-label>
+              <ion-radio color="success" slot="start" value="blanco"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label>Azul</ion-label>
+              <ion-radio color="success" slot="start" value="Azul"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label>Chico</ion-label>
+              <ion-radio color="success" slot="start" value="Chico"></ion-radio>
+            </ion-item>
+          </ion-radio-group>
+        </ion-col>
+      </ion-col>
+    </ion-item> -->
+
+    <!-- pregunta 5 -->
+    <!-- <ion-item>
+      <ion-col>
+        <ion-col size="12">
+          <h4> ¿Que significa? : 'Moana' </h4>
+        </ion-col>
+        <ion-col>
+          <ion-radio-group [(ngModel)]="lec1preg1selectedResponse">
+            <ion-item>
+              <ion-label>bailar</ion-label>
+              <ion-radio color="success" slot="start" value="bailar"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label>blanco</ion-label>
+              <ion-radio color="success" slot="start" value="blanco"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label>Azul</ion-label>
+              <ion-radio color="success" slot="start" value="Azul"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label>Chico</ion-label>
+              <ion-radio color="success" slot="start" value="Chico"></ion-radio>
+            </ion-item>
+          </ion-radio-group>
+        </ion-col>
+      </ion-col>
+    </ion-item> -->
   </ion-list>
-  <ion-button *ngIf="inSessionUser.userType == 2" expand="block" style="margin-top:10%;" (click)="alertaComentario()">Enviar Comentario</ion-button>
-  <ion-button style="padding-bottom: 10px;" *ngIf="inSessionUser.userType == 2" class="lesson_button" (click)="alertaCancelar()">Cancelar</ion-button>
-  <ion-button style="padding-bottom: 10px;" *ngIf="inSessionUser.userType == 2" class="lesson_button" (click)="alertaLeccion()">Enviar</ion-button>
+
+  <!-- Lista de preguntas lecc 2 -->
+  <ion-list *ngIf="leccion.idLeccion == 2">
+
+    <!-- pregunta 1 -->
+    <ion-item>
+      <ion-col>
+        <ion-col size="12">
+          <h4> ¿Que significa? : 'Ha’avare' </h4>
+        </ion-col>
+        <ion-col>
+          <ion-radio-group [(ngModel)]="lec2preg1selectedResponse">
+            <ion-item>
+              <ion-label>Negro</ion-label>
+              <ion-radio color="success" slot="start" value="Negro"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label>Mentiroso</ion-label>
+              <ion-radio color="success" slot="start" value="Mentiroso"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label>hija</ion-label>
+              <ion-radio color="success" slot="start" value="hija"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label>Gracias</ion-label>
+              <ion-radio color="success" slot="start" value="Gracias"></ion-radio>
+            </ion-item>
+          </ion-radio-group>
+        </ion-col>
+      </ion-col>
+    </ion-item>
+
+    <!-- pregunta 2 -->
+    <ion-item>
+      <ion-col>
+        <ion-col size="12">
+          <h4> ¿Que significa? : 'Ito Ito' </h4>
+        </ion-col>
+        <ion-col>
+          <ion-radio-group [(ngModel)]="lec2preg1selectedResponse">
+            <ion-item>
+              <ion-label>cantar</ion-label>
+              <ion-radio color="success" slot="start" value="cantar"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label>bailar</ion-label>
+              <ion-radio color="success" slot="start" value="bailar"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label>Azul</ion-label>
+              <ion-radio color="success" slot="start" value="Azul"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label>Trabajador</ion-label>
+              <ion-radio color="success" slot="start" value="Trabajador"></ion-radio>
+            </ion-item>
+          </ion-radio-group>
+        </ion-col>
+      </ion-col>
+    </ion-item>
+
+    <!-- pregunta 3 -->
+    <ion-item>
+      <ion-col>
+        <ion-col size="12">
+          <h4> ¿Que significa? : 'Papaku' </h4>
+        </ion-col>
+        <ion-col>
+          <ion-radio-group [(ngModel)]="lec2preg1selectedResponse">
+            <ion-item>
+              <ion-label>Flaco</ion-label>
+              <ion-radio color="success" slot="start" value="Flaco"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label>Gracias</ion-label>
+              <ion-radio color="success" slot="start" value="Gracias"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label>Frío</ion-label>
+              <ion-radio color="success" slot="start" value="Frío"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label>Chico</ion-label>
+              <ion-radio color="success" slot="start" value="Chico"></ion-radio>
+            </ion-item>
+          </ion-radio-group>
+        </ion-col>
+      </ion-col>
+    </ion-item>
+
+    <!-- pregunta 4 -->
+    <!-- <ion-item>
+      <ion-col>
+        <ion-col size="12">
+          <h4> ¿Que significa? : 'Moana' </h4>
+        </ion-col>
+        <ion-col>
+          <ion-radio-group [(ngModel)]="lec2preg1selectedResponse">
+            <ion-item>
+              <ion-label>bailar</ion-label>
+              <ion-radio color="success" slot="start" value="bailar"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label>blanco</ion-label>
+              <ion-radio color="success" slot="start" value="blanco"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label>Azul</ion-label>
+              <ion-radio color="success" slot="start" value="Azul"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label>Chico</ion-label>
+              <ion-radio color="success" slot="start" value="Chico"></ion-radio>
+            </ion-item>
+          </ion-radio-group>
+        </ion-col>
+      </ion-col>
+    </ion-item> -->
+
+    <!-- pregunta 5 -->
+    <!-- <ion-item>
+      <ion-col>
+        <ion-col size="12">
+          <h4> ¿Que significa? : 'Moana' </h4>
+        </ion-col>
+        <ion-col>
+          <ion-radio-group [(ngModel)]="lec2preg1selectedResponse">
+            <ion-item>
+              <ion-label>bailar</ion-label>
+              <ion-radio color="success" slot="start" value="bailar"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label>blanco</ion-label>
+              <ion-radio color="success" slot="start" value="blanco"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label>Azul</ion-label>
+              <ion-radio color="success" slot="start" value="Azul"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label>Chico</ion-label>
+              <ion-radio color="success" slot="start" value="Chico"></ion-radio>
+            </ion-item>
+          </ion-radio-group>
+        </ion-col>
+      </ion-col>
+    </ion-item> -->
+  
+  </ion-list>
+
+  <!-- Lista de preguntas lecc 3 -->
+  <ion-list *ngIf="leccion.idLeccion == 3">
+
+    <!-- pregunta 1 -->
+    <ion-item>
+      <ion-col>
+        <ion-col size="12">
+          <h4> ¿Que significa? : 'Ha’avare' </h4>
+        </ion-col>
+        <ion-col>
+          <ion-radio-group [(ngModel)]="lec3preg1selectedResponse">
+            <ion-item>
+              <ion-label>Negro</ion-label>
+              <ion-radio color="success" slot="start" value="Negro"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label>Plato</ion-label>
+              <ion-radio color="success" slot="start" value="Plato"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label>Trabajador</ion-label>
+              <ion-radio color="success" slot="start" value="Trabajador"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label>Mentiroso</ion-label>
+              <ion-radio color="success" slot="start" value="Mentiroso"></ion-radio>
+            </ion-item>
+          </ion-radio-group>
+        </ion-col>
+      </ion-col>
+    </ion-item>
+
+    <!-- pregunta 2 -->
+    <!-- <ion-item>
+      <ion-col>
+        <ion-col size="12">
+          <h4> ¿Que significa? : 'Moana' </h4>
+        </ion-col>
+        <ion-col>
+          <ion-radio-group [(ngModel)]="lec3preg1selectedResponse">
+            <ion-item>
+              <ion-label>bailar</ion-label>
+              <ion-radio color="success" slot="start" value="bailar"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label>blanco</ion-label>
+              <ion-radio color="success" slot="start" value="blanco"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label>Azul</ion-label>
+              <ion-radio color="success" slot="start" value="Azul"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label>Chico</ion-label>
+              <ion-radio color="success" slot="start" value="Chico"></ion-radio>
+            </ion-item>
+          </ion-radio-group>
+        </ion-col>
+      </ion-col>
+    </ion-item> -->
+
+    <!-- pregunta 3 -->
+    <!-- <ion-item>
+      <ion-col>
+        <ion-col size="12">
+          <h4> ¿Que significa? : 'Moana' </h4>
+        </ion-col>
+        <ion-col>
+          <ion-radio-group [(ngModel)]="lec3preg1selectedResponse">
+            <ion-item>
+              <ion-label>bailar</ion-label>
+              <ion-radio color="success" slot="start" value="bailar"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label>blanco</ion-label>
+              <ion-radio color="success" slot="start" value="blanco"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label>Azul</ion-label>
+              <ion-radio color="success" slot="start" value="Azul"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label>Chico</ion-label>
+              <ion-radio color="success" slot="start" value="Chico"></ion-radio>
+            </ion-item>
+          </ion-radio-group>
+        </ion-col>
+      </ion-col>
+    </ion-item> -->
+
+    <!-- pregunta 4 -->
+    <!-- <ion-item>
+      <ion-col>
+        <ion-col size="12">
+          <h4> ¿Que significa? : 'Moana' </h4>
+        </ion-col>
+        <ion-col>
+          <ion-radio-group [(ngModel)]="lec3preg1selectedResponse">
+            <ion-item>
+              <ion-label>bailar</ion-label>
+              <ion-radio color="success" slot="start" value="bailar"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label>blanco</ion-label>
+              <ion-radio color="success" slot="start" value="blanco"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label>Azul</ion-label>
+              <ion-radio color="success" slot="start" value="Azul"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label>Chico</ion-label>
+              <ion-radio color="success" slot="start" value="Chico"></ion-radio>
+            </ion-item>
+          </ion-radio-group>
+        </ion-col>
+      </ion-col>
+    </ion-item> -->
+
+    <!-- pregunta 5 -->
+    <!-- <ion-item>
+      <ion-col>
+        <ion-col size="12">
+          <h4> ¿Que significa? : 'Moana' </h4>
+        </ion-col>
+        <ion-col>
+          <ion-radio-group [(ngModel)]="lec3preg1selectedResponse">
+            <ion-item>
+              <ion-label>bailar</ion-label>
+              <ion-radio color="success" slot="start" value="bailar"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label>blanco</ion-label>
+              <ion-radio color="success" slot="start" value="blanco"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label>Azul</ion-label>
+              <ion-radio color="success" slot="start" value="Azul"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label>Chico</ion-label>
+              <ion-radio color="success" slot="start" value="Chico"></ion-radio>
+            </ion-item>
+          </ion-radio-group>
+        </ion-col>
+      </ion-col>
+    </ion-item> -->
+
+  </ion-list>
+
+  <!-- Lista de preguntas lecc 4 -->
+  <ion-list *ngIf="leccion.idLeccion == 4">
+
+    <!-- pregunta 1 -->
+    <ion-item>
+      <ion-col>
+        <ion-col size="12">
+          <h4> ¿Que significa? : 'Ito Ito' </h4>
+        </ion-col>
+        <ion-col>
+          <ion-radio-group [(ngModel)]="lec4preg1selectedResponse">
+            <ion-item>
+              <ion-label>bailar</ion-label>
+              <ion-radio color="success" slot="start" value="bailar"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label>blanco</ion-label>
+              <ion-radio color="success" slot="start" value="blanco"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label>Azul</ion-label>
+              <ion-radio color="success" slot="start" value="Azul"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label>Chico</ion-label>
+              <ion-radio color="success" slot="start" value="Chico"></ion-radio>
+            </ion-item>
+          </ion-radio-group>
+        </ion-col>
+      </ion-col>
+    </ion-item>
+
+    <!-- pregunta 2 -->
+    <ion-item>
+      <ion-col>
+        <ion-col size="12">
+          <h4> ¿Que significa? : 'Papaku' </h4>
+        </ion-col>
+        <ion-col>
+          <ion-radio-group [(ngModel)]="lec4preg1selectedResponse">
+            <ion-item>
+              <ion-label>bailar</ion-label>
+              <ion-radio color="success" slot="start" value="bailar"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label>blanco</ion-label>
+              <ion-radio color="success" slot="start" value="blanco"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label>Azul</ion-label>
+              <ion-radio color="success" slot="start" value="Azul"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label>Chico</ion-label>
+              <ion-radio color="success" slot="start" value="Chico"></ion-radio>
+            </ion-item>
+          </ion-radio-group>
+        </ion-col>
+      </ion-col>
+    </ion-item>
+
+    <!-- pregunta 3 -->
+    <ion-item>
+      <ion-col>
+        <ion-col size="12">
+          <h4> ¿Que significa? : 'ori' </h4>
+        </ion-col>
+        <ion-col>
+          <ion-radio-group [(ngModel)]="lec4preg1selectedResponse">
+            <ion-item>
+              <ion-label>bailar</ion-label>
+              <ion-radio color="success" slot="start" value="bailar"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label>blanco</ion-label>
+              <ion-radio color="success" slot="start" value="blanco"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label>Azul</ion-label>
+              <ion-radio color="success" slot="start" value="Azul"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label>Chico</ion-label>
+              <ion-radio color="success" slot="start" value="Chico"></ion-radio>
+            </ion-item>
+          </ion-radio-group>
+        </ion-col>
+      </ion-col>
+
+    </ion-item>
+
+    <!-- pregunta 4 -->
+    <ion-item>
+      <ion-col>
+        <ion-col size="12">
+          <h4> ¿Que significa? : 'Takeo' </h4>
+        </ion-col>
+        <ion-col>
+          <ion-radio-group [(ngModel)]="lec4preg1selectedResponse">
+            <ion-item>
+              <ion-label>bailar</ion-label>
+              <ion-radio color="success" slot="start" value="bailar"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label>blanco</ion-label>
+              <ion-radio color="success" slot="start" value="blanco"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label>Azul</ion-label>
+              <ion-radio color="success" slot="start" value="Azul"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label>Chico</ion-label>
+              <ion-radio color="success" slot="start" value="Chico"></ion-radio>
+            </ion-item>
+          </ion-radio-group>
+        </ion-col>
+      </ion-col>
+
+    </ion-item>
+
+    <!-- pregunta 5 -->
+    <!-- <ion-item>
+      <ion-col>
+        <ion-col size="12">
+          <h4> ¿Que significa? : 'Moana' </h4>
+        </ion-col>
+        <ion-col>
+          <ion-radio-group [(ngModel)]="lec4preg1selectedResponse">
+            <ion-item>
+              <ion-label>bailar</ion-label>
+              <ion-radio color="success" slot="start" value="bailar"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label>blanco</ion-label>
+              <ion-radio color="success" slot="start" value="blanco"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label>Azul</ion-label>
+              <ion-radio color="success" slot="start" value="Azul"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label>Chico</ion-label>
+              <ion-radio color="success" slot="start" value="Chico"></ion-radio>
+            </ion-item>
+          </ion-radio-group>
+        </ion-col>
+      </ion-col>
+    </ion-item> -->
+
+  </ion-list>
+
+  <!-- Lista de preguntas lecc 5 -->
+  <ion-list *ngIf="leccion.idLeccion == 5">
+
+    <!-- pregunta 1 -->
+    <!-- <ion-item>
+      <ion-col>
+        <ion-col size="12">
+          <h4> ¿Que significa? : 'Moana' </h4>
+        </ion-col>
+        <ion-col>
+          <ion-radio-group [(ngModel)]="lec5preg1selectedResponse">
+            <ion-item>
+              <ion-label>bailar</ion-label>
+              <ion-radio color="success" slot="start" value="bailar"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label>blanco</ion-label>
+              <ion-radio color="success" slot="start" value="blanco"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label>Azul</ion-label>
+              <ion-radio color="success" slot="start" value="Azul"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label>Chico</ion-label>
+              <ion-radio color="success" slot="start" value="Chico"></ion-radio>
+            </ion-item>
+          </ion-radio-group>
+        </ion-col>
+      </ion-col>
+    </ion-item> -->
+
+    <!-- pregunta 2 -->
+    <!-- <ion-item>
+      <ion-col>
+        <ion-col size="12">
+          <h4> ¿Que significa? : 'Moana' </h4>
+        </ion-col>
+        <ion-col>
+          <ion-radio-group [(ngModel)]="lec5preg1selectedResponse">
+            <ion-item>
+              <ion-label>bailar</ion-label>
+              <ion-radio color="success" slot="start" value="bailar"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label>blanco</ion-label>
+              <ion-radio color="success" slot="start" value="blanco"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label>Azul</ion-label>
+              <ion-radio color="success" slot="start" value="Azul"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label>Chico</ion-label>
+              <ion-radio color="success" slot="start" value="Chico"></ion-radio>
+            </ion-item>
+          </ion-radio-group>
+        </ion-col>
+      </ion-col>
+    </ion-item> -->
+
+    <!-- pregunta 3 -->
+    <!-- <ion-item>
+      <ion-col>
+        <ion-col size="12">
+          <h4> ¿Que significa? : 'Moana' </h4>
+        </ion-col>
+        <ion-col>
+          <ion-radio-group [(ngModel)]="lec5preg1selectedResponse">
+            <ion-item>
+              <ion-label>bailar</ion-label>
+              <ion-radio color="success" slot="start" value="bailar"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label>blanco</ion-label>
+              <ion-radio color="success" slot="start" value="blanco"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label>Azul</ion-label>
+              <ion-radio color="success" slot="start" value="Azul"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label>Chico</ion-label>
+              <ion-radio color="success" slot="start" value="Chico"></ion-radio>
+            </ion-item>
+          </ion-radio-group>
+        </ion-col>
+      </ion-col>
+    </ion-item> -->
+
+    <!-- pregunta 4 -->
+    <!-- <ion-item>
+      <ion-col>
+        <ion-col size="12">
+          <h4> ¿Que significa? : 'Moana' </h4>
+        </ion-col>
+        <ion-col>
+          <ion-radio-group [(ngModel)]="lec5preg1selectedResponse">
+            <ion-item>
+              <ion-label>bailar</ion-label>
+              <ion-radio color="success" slot="start" value="bailar"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label>blanco</ion-label>
+              <ion-radio color="success" slot="start" value="blanco"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label>Azul</ion-label>
+              <ion-radio color="success" slot="start" value="Azul"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label>Chico</ion-label>
+              <ion-radio color="success" slot="start" value="Chico"></ion-radio>
+            </ion-item>
+          </ion-radio-group>
+        </ion-col>
+      </ion-col>
+    </ion-item> -->
+
+    <!-- pregunta 5 -->
+    <!-- <ion-item>
+      <ion-col>
+        <ion-col size="12">
+          <h4> ¿Que significa? : 'Moana' </h4>
+        </ion-col>
+        <ion-col>
+          <ion-radio-group [(ngModel)]="lec5preg1selectedResponse">
+            <ion-item>
+              <ion-label>bailar</ion-label>
+              <ion-radio color="success" slot="start" value="bailar"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label>blanco</ion-label>
+              <ion-radio color="success" slot="start" value="blanco"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label>Azul</ion-label>
+              <ion-radio color="success" slot="start" value="Azul"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label>Chico</ion-label>
+              <ion-radio color="success" slot="start" value="Chico"></ion-radio>
+            </ion-item>
+          </ion-radio-group>
+        </ion-col>
+      </ion-col>
+    </ion-item> -->
+
+  </ion-list>
+
+  <!-- Lista de preguntas lecc 6 -->
+  <ion-list *ngIf="leccion.idLeccion == 6">
+
+    <!-- pregunta 1 -->
+    <!-- <ion-item>
+      <ion-col>
+        <ion-col size="12">
+          <h4> ¿Que significa? : 'Moana' </h4>
+        </ion-col>
+        <ion-col>
+          <ion-radio-group [(ngModel)]="lec6preg1selectedResponse">
+            <ion-item>
+              <ion-label>bailar</ion-label>
+              <ion-radio color="success" slot="start" value="bailar"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label>blanco</ion-label>
+              <ion-radio color="success" slot="start" value="blanco"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label>Azul</ion-label>
+              <ion-radio color="success" slot="start" value="Azul"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label>Chico</ion-label>
+              <ion-radio color="success" slot="start" value="Chico"></ion-radio>
+            </ion-item>
+          </ion-radio-group>
+        </ion-col>
+      </ion-col>
+    </ion-item> -->
+
+    <!-- pregunta 2 -->
+    <!-- <ion-item>
+      <ion-col>
+        <ion-col size="12">
+          <h4> ¿Que significa? : 'Moana' </h4>
+        </ion-col>
+        <ion-col>
+          <ion-radio-group [(ngModel)]="lec6preg1selectedResponse">
+            <ion-item>
+              <ion-label>bailar</ion-label>
+              <ion-radio color="success" slot="start" value="bailar"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label>blanco</ion-label>
+              <ion-radio color="success" slot="start" value="blanco"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label>Azul</ion-label>
+              <ion-radio color="success" slot="start" value="Azul"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label>Chico</ion-label>
+              <ion-radio color="success" slot="start" value="Chico"></ion-radio>
+            </ion-item>
+          </ion-radio-group>
+        </ion-col>
+      </ion-col>
+    </ion-item> -->
+
+    <!-- pregunta 3 -->
+    <!-- <ion-item>
+      <ion-col>
+        <ion-col size="12">
+          <h4> ¿Que significa? : 'Moana' </h4>
+        </ion-col>
+        <ion-col>
+          <ion-radio-group [(ngModel)]="lec6preg1selectedResponse">
+            <ion-item>
+              <ion-label>bailar</ion-label>
+              <ion-radio color="success" slot="start" value="bailar"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label>blanco</ion-label>
+              <ion-radio color="success" slot="start" value="blanco"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label>Azul</ion-label>
+              <ion-radio color="success" slot="start" value="Azul"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label>Chico</ion-label>
+              <ion-radio color="success" slot="start" value="Chico"></ion-radio>
+            </ion-item>
+          </ion-radio-group>
+        </ion-col>
+      </ion-col>
+    </ion-item> -->
+
+    <!-- pregunta 4 -->
+    <!-- <ion-item>
+      <ion-col>
+        <ion-col size="12">
+          <h4> ¿Que significa? : 'Moana' </h4>
+        </ion-col>
+        <ion-col>
+          <ion-radio-group [(ngModel)]="lec6preg1selectedResponse">
+            <ion-item>
+              <ion-label>bailar</ion-label>
+              <ion-radio color="success" slot="start" value="bailar"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label>blanco</ion-label>
+              <ion-radio color="success" slot="start" value="blanco"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label>Azul</ion-label>
+              <ion-radio color="success" slot="start" value="Azul"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label>Chico</ion-label>
+              <ion-radio color="success" slot="start" value="Chico"></ion-radio>
+            </ion-item>
+          </ion-radio-group>
+        </ion-col>
+      </ion-col>
+    </ion-item> -->
+
+    <!-- pregunta 5 -->
+    <!-- <ion-item>
+      <ion-col>
+        <ion-col size="12">
+          <h4> ¿Que significa? : 'Moana' </h4>
+        </ion-col>
+        <ion-col>
+          <ion-radio-group [(ngModel)]="lec6preg1selectedResponse">
+            <ion-item>
+              <ion-label>bailar</ion-label>
+              <ion-radio color="success" slot="start" value="bailar"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label>blanco</ion-label>
+              <ion-radio color="success" slot="start" value="blanco"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label>Azul</ion-label>
+              <ion-radio color="success" slot="start" value="Azul"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label>Chico</ion-label>
+              <ion-radio color="success" slot="start" value="Chico"></ion-radio>
+            </ion-item>
+          </ion-radio-group>
+        </ion-col>
+      </ion-col>
+    </ion-item> -->
+
+  </ion-list>
+
+  <!-- Lista de preguntas lecc 7 -->
+  <ion-list *ngIf="leccion.idLeccion == 7">
+
+    <!-- pregunta 1 -->
+    <!-- <ion-item>
+      <ion-col>
+        <ion-col size="12">
+          <h4> ¿Que significa? : 'Moana' </h4>
+        </ion-col>
+        <ion-col>
+          <ion-radio-group [(ngModel)]="lec7preg1selectedResponse">
+            <ion-item>
+              <ion-label>bailar</ion-label>
+              <ion-radio color="success" slot="start" value="bailar"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label>blanco</ion-label>
+              <ion-radio color="success" slot="start" value="blanco"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label>Azul</ion-label>
+              <ion-radio color="success" slot="start" value="Azul"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label>Chico</ion-label>
+              <ion-radio color="success" slot="start" value="Chico"></ion-radio>
+            </ion-item>
+          </ion-radio-group>
+        </ion-col>
+      </ion-col>
+    </ion-item> -->
+
+    <!-- pregunta 2 -->
+    <!-- <ion-item>
+      <ion-col>
+        <ion-col size="12">
+          <h4> ¿Que significa? : 'Moana' </h4>
+        </ion-col>
+        <ion-col>
+          <ion-radio-group [(ngModel)]="lec7preg1selectedResponse">
+            <ion-item>
+              <ion-label>bailar</ion-label>
+              <ion-radio color="success" slot="start" value="bailar"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label>blanco</ion-label>
+              <ion-radio color="success" slot="start" value="blanco"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label>Azul</ion-label>
+              <ion-radio color="success" slot="start" value="Azul"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label>Chico</ion-label>
+              <ion-radio color="success" slot="start" value="Chico"></ion-radio>
+            </ion-item>
+          </ion-radio-group>
+        </ion-col>
+      </ion-col>
+    </ion-item> -->
+
+    <!-- pregunta 3 -->
+    <!-- <ion-item>
+      <ion-col>
+        <ion-col size="12">
+          <h4> ¿Que significa? : 'Moana' </h4>
+        </ion-col>
+        <ion-col>
+          <ion-radio-group [(ngModel)]="lec7preg1selectedResponse">
+            <ion-item>
+              <ion-label>bailar</ion-label>
+              <ion-radio color="success" slot="start" value="bailar"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label>blanco</ion-label>
+              <ion-radio color="success" slot="start" value="blanco"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label>Azul</ion-label>
+              <ion-radio color="success" slot="start" value="Azul"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label>Chico</ion-label>
+              <ion-radio color="success" slot="start" value="Chico"></ion-radio>
+            </ion-item>
+          </ion-radio-group>
+        </ion-col>
+      </ion-col>
+    </ion-item> -->
+
+    <!-- pregunta 4 -->
+    <!-- <ion-item>
+      <ion-col>
+        <ion-col size="12">
+          <h4> ¿Que significa? : 'Moana' </h4>
+        </ion-col>
+        <ion-col>
+          <ion-radio-group [(ngModel)]="lec7preg1selectedResponse">
+            <ion-item>
+              <ion-label>bailar</ion-label>
+              <ion-radio color="success" slot="start" value="bailar"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label>blanco</ion-label>
+              <ion-radio color="success" slot="start" value="blanco"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label>Azul</ion-label>
+              <ion-radio color="success" slot="start" value="Azul"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label>Chico</ion-label>
+              <ion-radio color="success" slot="start" value="Chico"></ion-radio>
+            </ion-item>
+          </ion-radio-group>
+        </ion-col>
+      </ion-col>
+    </ion-item> -->
+
+    <!-- pregunta 5 -->
+    <!-- <ion-item>
+      <ion-col>
+        <ion-col size="12">
+          <h4> ¿Que significa? : 'Moana' </h4>
+        </ion-col>
+        <ion-col>
+          <ion-radio-group [(ngModel)]="lec7preg1selectedResponse">
+            <ion-item>
+              <ion-label>bailar</ion-label>
+              <ion-radio color="success" slot="start" value="bailar"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label>blanco</ion-label>
+              <ion-radio color="success" slot="start" value="blanco"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label>Azul</ion-label>
+              <ion-radio color="success" slot="start" value="Azul"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label>Chico</ion-label>
+              <ion-radio color="success" slot="start" value="Chico"></ion-radio>
+            </ion-item>
+          </ion-radio-group>
+        </ion-col>
+      </ion-col>
+    </ion-item> -->
+
+  </ion-list>
+
+  <ion-button *ngIf="inSessionUser.userType == 2" expand="block" style="margin-top:10%;" (click)="alertaComentario()">
+    Enviar Comentario</ion-button>
+  <ion-button style="padding-bottom: 10px;" *ngIf="inSessionUser.userType == 2" class="lesson_button"
+    (click)="alertaCancelar()">Cancelar</ion-button>
+  <ion-button style="padding-bottom: 10px;" *ngIf="inSessionUser.userType == 2" class="lesson_button"
+    (click)="leccionReview()">Enviar</ion-button>
   <br>
   <br>
   <br>

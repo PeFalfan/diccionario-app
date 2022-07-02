@@ -44,4 +44,9 @@ export class UserService {
   getSummary():Observable<IResponseModel>{
     return this.http.get<IResponseModel>(this.url+"/getResume");
   }
+
+  approvedLesson(idUser:number, idLesson:number):Observable<IResponseModel> {
+    let urlToHit = this.url + "/approveLesson?userId="+idUser+"&lessonId=" + idLesson;
+    return this.http.get<IResponseModel>(urlToHit);
+  }
 }
