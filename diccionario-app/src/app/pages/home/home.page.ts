@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { NavController } from '@ionic/angular';
 import { IUser } from 'src/app/interfaces/user-interfaces';
 import { DatabaseService } from 'src/app/services/database/database.service';
 
@@ -45,7 +46,7 @@ export class HomePage implements OnInit {
 
  
 
-  constructor(private rutaActiva: ActivatedRoute,
+  constructor(private navCtrl: NavController,
     private dbService: DatabaseService) {
   }
 
@@ -87,13 +88,7 @@ export class HomePage implements OnInit {
   cerrarSesion() {
 
     this.dbService.clearSession();
-    this.volverLogin();
-
-  }
-
-  volverLogin() {
-
-    window.location.assign('/log-in')
+    this.navCtrl.navigateRoot('/log-in')
 
   }
 

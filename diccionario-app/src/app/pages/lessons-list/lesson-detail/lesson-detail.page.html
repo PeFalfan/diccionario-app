@@ -40,7 +40,10 @@
       </ion-col>
     </ion-item>
   </ion-list>
-  <ion-button expand="block" style="margin-top:10%;" (click)="alertaComentario()">Enviar Comentario</ion-button>
-  <ion-button class="lesson_button" (click)="alertaCancelar()">Cancelar</ion-button>
-  <ion-button class="lesson_button" (click)="alertaLeccion()">Enviar</ion-button>
+  <ion-button *ngIf="inSessionUser.userType == 2" expand="block" style="margin-top:10%;" (click)="alertaComentario()">Enviar Comentario</ion-button>
+  <ion-button style="padding-bottom: 10px;" *ngIf="inSessionUser.userType == 2" class="lesson_button" (click)="alertaCancelar()">Cancelar</ion-button>
+  <ion-button style="padding-bottom: 10px;" *ngIf="inSessionUser.userType == 2" class="lesson_button" (click)="alertaLeccion()">Enviar</ion-button>
+  <br>
+  <br>
+  <br>
 </ion-content>

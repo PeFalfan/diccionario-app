@@ -40,3 +40,9 @@ export interface IStudentSummary {
     lessons: string,
     percentage: string
 }
+
+export interface ILessonResume {
+    userId : number,
+    idLesson : number,
+    stateLesson: number
+}

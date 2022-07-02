@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AlertController, NavController } from '@ionic/angular';
 import { IComentario, ILeccion, IPregunta, ITerm } from 'src/app/interfaces/lesson-interface';
 import { IUser } from 'src/app/interfaces/user-interfaces';
+import { DatabaseService } from 'src/app/services/database/database.service';
 import { DictionaryService } from 'src/app/services/dictionary/dictionary.service';
 import { UserService } from 'src/app/services/user/usuario.service';
 
@@ -25,94 +26,6 @@ export class LessonDetailPage implements OnInit {
    */
 
   alternativas:any = [
-    {
-      word:'algo 1',
-      traslation: 'traduccion 1'
-    },
-    {
-      word:'algo 2',
-      traslation: 'traduccion 2'
-    },
-    {
-      word:'algo 3',
-      traslation: 'traduccion 3'
-    },
-    {
-      word:'algo 4',
-      traslation: 'traduccion 4'
-    },
-    {
-      word:'algo 5',
-      traslation: 'traduccion 5'
-    },
-    {
-      word:'algo 6',
-      traslation: 'traduccion 6'
-    },
-    {
-      word:'algo 7',
-      traslation: 'traduccion 7'
-    },
-    {
-      word:'algo 8',
-      traslation: 'traduccion 8'
-    },
-    {
-      word:'algo 9',
-      traslation: 'traduccion 9'
-    },
-    {
-      word:'algo 10',
-      traslation: 'traduccion 10'
-    },
-    {
-      word:'algo 11',
-      traslation: 'traduccion 11'
-    },
-    {
-      word:'algo 1',
-      traslation: 'traduccion 1'
-    },
-    {
-      word:'algo 2',
-      traslation: 'traduccion 2'
-    },
-    {
-      word:'algo 3',
-      traslation: 'traduccion 3'
-    },
-    {
-      word:'algo 4',
-      traslation: 'traduccion 4'
-    },
-    {
-      word:'algo 5',
-      traslation: 'traduccion 5'
-    },
-    {
-      word:'algo 6',
-      traslation: 'traduccion 6'
-    },
-    {
-      word:'algo 7',
-      traslation: 'traduccion 7'
-    },
-    {
-      word:'algo 8',
-      traslation: 'traduccion 8'
-    },
-    {
-      word:'algo 9',
-      traslation: 'traduccion 9'
-    },
-    {
-      word:'algo 10',
-      traslation: 'traduccion 10'
-    },
-    {
-      word:'algo 11',
-      traslation: 'traduccion 11'
-    }
   ]
 
   comentario:IComentario = {
@@ -126,7 +39,8 @@ export class LessonDetailPage implements OnInit {
   constructor(private alertController: AlertController, 
               public navController: NavController, 
               private serviceUsuario: UserService,
-              private dicService: DictionaryService) { }
+              private dicService: DictionaryService,
+              private dbService: DatabaseService) { }
 
   ngOnInit() {
     try {
@@ -144,6 +58,12 @@ export class LessonDetailPage implements OnInit {
 
     this.comentario.idLesson = this.leccion.idLeccion;
     this.comentario.idUser = 1; // de momento el usuario en duro, a cambiar al momento de iniciar con el manejo de servicios.
+
+    // cargamos los datos del usuario:
+
+    this.dbService.loadUserInSession().then( resp => {
+      this.inSessionUser = resp;
+    });
 
     //this.alternativas.sort((a, b) => a.word < b.word ? -1 : a.word > b.word ? 1 : 0)
   }

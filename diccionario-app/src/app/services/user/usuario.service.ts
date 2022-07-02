@@ -1,9 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { IComentario } from 'src/app/interfaces/lesson-interface';
+import { IComentario, ILessonResume } from 'src/app/interfaces/lesson-interface';
 import { ILogin } from 'src/app/interfaces/login-interfaces';
-import { ILogInResponseModel, IResponseModel, IResponseModelLeccion } from 'src/app/interfaces/response-interfaces';
+import { ILessonsResponseModel, ILogInResponseModel, IResponseModel, IResponseModelLeccion } from 'src/app/interfaces/response-interfaces';
 import { IUser } from 'src/app/interfaces/user-interfaces';
 import { environment } from 'src/environments/environment';
 
@@ -24,6 +24,11 @@ export class UserService {
   loadLessons(): Observable<IResponseModelLeccion> {
     let urlToHit = this.url + "/getLessons";
     return this.http.get<IResponseModelLeccion>(urlToHit)
+  }
+
+  loadResume(idUser:number):Observable<ILessonsResponseModel> {
+    let urlToHit = this.url + "/getLessonResume?userId=" + idUser;
+    return this.http.get<ILessonsResponseModel>(urlToHit);
   }
 
   createUsuario(usuarioDic:IUser):Observable<IResponseModel>{

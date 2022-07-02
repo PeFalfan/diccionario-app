@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { NavigationExtras, Router } from '@angular/router';
-import { NavController } from '@ionic/angular';
-import { ILeccion, IPregunta } from 'src/app/interfaces/lesson-interface';
+import { Router } from '@angular/router';
+import { AlertController } from '@ionic/angular';
+import { ILeccion, ILessonResume, IPregunta } from 'src/app/interfaces/lesson-interface';
 import { IUser } from 'src/app/interfaces/user-interfaces';
 import { DatabaseService } from 'src/app/services/database/database.service';
 import { UserService } from 'src/app/services/user/usuario.service';
-
 
 @Component({
   selector: 'app-lessons-list',
@@ -30,86 +29,102 @@ export class LessonsListPage implements OnInit {
     userType: 0,
     remember: false
   }
+  lessonsResumes:Array<ILessonResume> = []
 
   constructor(private router: Router, 
-              private navController: NavController, 
               private serviceUsuario: UserService,
-              private dbService: DatabaseService) { }
+              private dbService: DatabaseService,
+              private alertController : AlertController) { }
 
   ngOnInit() {
-
+    
+    this.loadUser();
+  
     this.cargaLecciones();
 
-    this.loadUser();
+  }
 
-    
+  loadPersonalLessonsStats(){
+    this.serviceUsuario.loadResume(this.inSessionUser.idUser).subscribe(resp => {
+      this.lessonsResumes = resp.data;
+      
 
+      this.lessonsResumes.forEach( ele => {
+
+        if (ele.stateLesson == 2) {
+          this.lastLessonApproved = ele.idLesson
+        }
+
+
+        console.log("ultima aprobada en personal: Leccion " + ele.idLesson + " Estado: " + ele.stateLesson)
+      })
+
+      // calcular procentage
+
+      this.percent = (this.lastLessonApproved / 7); 
+
+      console.log("ultima post calculo inicial" + this.percent)
+      
+      this.percent = parseFloat(this.percent.toFixed(2));
+      
+      console.log("ultima postFixed " + this.percent)
+
+    })
   }
 
   loadUser(){
     this.dbService.loadUserInSession().then((resp:IUser) =>{
       this.inSessionUser = resp;
+      this.loadPersonalLessonsStats();
     })
-  }
-
-  lastApproved(){
-    this.lessons.forEach(les => {
-      if (les.estadoLeccion == 2){
-        this.lastLessonApproved = les.idLeccion
-      }
-    })
-    if (this.lastLessonApproved == undefined || this.lastLessonApproved == 0){
-      this.lastLessonApproved = 1;
-    }
-
   }
 
   cargarLeccion(lesson:ILeccion) {
-    this.lastApproved();
-    if(this.lastLessonApproved >= lesson.idLeccion){
+
+    if(this.lastLessonApproved +1 >= this.lessonsResumes[lesson.idLeccion - 1].idLesson){
       this.lessons.forEach(element => {
         if (element.idLeccion == lesson.idLeccion) {
           this.leccionAEnviar = element
         }
       });
+
       this.router.navigate(['lesson-detail'], {
         state: {
           data: this.leccionAEnviar
         }
       })
     } else {
-      alert("Debes completar las lecciones anteriores a esta.")
+
+      this.alertaErrorLeccion();
+      
     }
+  }
+
+  async alertaErrorLeccion() {
+    const alert = await this.alertController.create({
+      header: 'Ojito!',
+      message: 'Debes completar las lecciones previas para ingresar a esta!',
+      buttons:
+        [
+          {
+            text: 'OK',
+            cssClass: 'secondary',
+            id: 'confirm-button',
+            handler: () => {
+              console.log('Error');
+            }
+          }
+        ]
+    });
+    await alert.present();
+    const { role } = await alert.onDidDismiss();
+    console.log('onDidDismiss resolved with role', role);
   }
 
   cargaLecciones() {
-    console.log("Peter: servicio carga de lecciones")
     this.serviceUsuario.loadLessons().subscribe(resp => {
       this.lessons = resp.data
-      console.log("Peter: servicio carga de lecciones" + resp.data)
     })
   }
 
-  /*validarCorreo() {
-
-    console.log(this.modeloCorreo)
-    console.log(this.modeloContrasena)
-    var correo = this.modeloCorreo
-    var contrasena = this.modeloContrasena
-    var regex = /^(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/
-    if (correo.indexOf('@duocuc.cl') >= 0) {
-      console.log('correo ok')
-
-    }
-    else {
-      console.log('correo no ok')
-    }
-    if (regex.test(contrasena)) {
-      console.log('contrase;a ok')
-    }
-    else {
-      console.log('contrasena no ok')
-    }
-    console.log('largo de input', contrasena.length)
-  }*/
 }

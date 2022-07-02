@@ -14,9 +14,9 @@
   <ion-item>
     <ion-list>
       <ion-list-header style="position:sticky">
-        <ion-label>Lecciones aprobadas: 3 / 7: 43%</ion-label>
+        <ion-title>Lecciones aprobadas: {{ lastLessonApproved }} / 7: {{ percent * 100}}%</ion-title>
       </ion-list-header>
-      <ion-progress-bar value="0.43"></ion-progress-bar>
+      <ion-progress-bar value="{{percent}}"></ion-progress-bar>
     </ion-list>
   </ion-item>
 </ion-header>
@@ -31,7 +31,7 @@
       </ion-avatar>
       <ion-label (click)="cargarLeccion(less)">
         <h2>{{less.tituloLeccion}}</h2>
-        <h3>Estado: {{less.estadoLeccion == 2 ? 'Completo' : 'Pendiente'}}</h3>
+        <h3>Estado: {{ lessonsResumes[less.idLeccion - 1].stateLesson == 2 ? 'Completo' : 'Pendiente'}}</h3>
         <br>
       </ion-label>
     </ion-item>

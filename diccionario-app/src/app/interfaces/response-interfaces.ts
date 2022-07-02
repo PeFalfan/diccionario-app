@@ -1,5 +1,5 @@
 import { IDocumento } from "./documento"
-import { IDictionary, ILeccion, IStudentSummary } from "./lesson-interface"
+import { IDictionary, ILeccion, ILessonResume, IStudentSummary } from "./lesson-interface"
 import { IUser } from "./user-interfaces"
 
 export interface IResponseModel {
@@ -36,4 +36,10 @@ export interface IDownloadDocumentResponseModel {
     error: string,
     messageResponse: string,
     data: Array<IDocumento>
+}
+
+export interface ILessonsResponseModel {
+    error: string,
+    messageResponse: string,
+    data: Array<ILessonResume>
 }
