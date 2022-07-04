@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { AlertController, NavController } from '@ionic/angular';
 import { IDocumento } from 'src/app/interfaces/documento';
 import { ILeccion } from 'src/app/interfaces/lesson-interface';
+import { IUser } from 'src/app/interfaces/user-interfaces';
+import { DatabaseService } from 'src/app/services/database/database.service';
 import { DocumentsService } from 'src/app/services/documents/documents.service';
 import { UserService } from 'src/app/services/user/usuario.service';
 
@@ -16,12 +19,21 @@ export class DocumentDownloadPage implements OnInit {
 
   documents: Array<IDocumento>;
   modalName: Uint8Array;
+  user:IUser;
 
   constructor(
     private serviceUsuario: UserService,
-    private documentService: DocumentsService) { }
+    private documentService: DocumentsService,
+    private dbService: DatabaseService,
+    private alertController: AlertController,
+    private navController: NavController) { }
 
   ngOnInit() {
+
+    this.dbService.loadUserInSession().then(resp => {
+      this.user = resp;
+    })
+
     this.cargaLecciones();
 
     //this.cargaDocumentos();
@@ -33,12 +45,76 @@ export class DocumentDownloadPage implements OnInit {
     })
   }
 
-  cargaDocumentos(){
-    alert("cargando documentos:")
-    this.documentService.downloadDocuments(this.leccionSeleccionada.idLeccion).subscribe(resp => {
-      this.documents = resp.data;
+  // cargaDocumentos(){
+
+  //   // this.documentService.downloadDocuments(this.leccionSeleccionada.idLeccion).subscribe(resp => {
+  //   //   this.documents = resp.data;
+  //   // })
+
+  // }
+
+  sendDocuments(){
+    this.documentService.sendDocumentsByEmail(this.leccionSeleccionada.idLeccion, this.user.clientEmail).subscribe( resp => {
+      if (resp.data == 1){
+        this.alertDocuments();
+      }else{
+        this.errorAlertDocuments()
+      }
     })
   }
+
+  async errorAlertDocuments() {
+    const alert = await this.alertController.create({
+      header: 'Documentos',
+      message: 'Ocurrió un error al momento de enviar los documentos, favor reintentar',
+      buttons:
+        [
+          {
+            text: 'OK',
+            role: 'cancel',
+            cssClass: 'secondary',
+            id: 'cancel-button',
+            handler: () => {
+              
+            }
+          }
+        ]
+    });
+    await alert.present();
+    const { role } = await alert.onDidDismiss();
+    console.log('onDidDismiss resolved with role', role);
+  }
+
+  async alertDocuments() {
+    const alert = await this.alertController.create({
+      header: 'Documentos',
+      message: 'Pronto recibirás un correo con los documentos!',
+      buttons:
+        [
+          {
+            text: 'Volver al inicio',
+            role: 'cancel',
+            cssClass: 'secondary',
+            id: 'cancel-button',
+            handler: () => {
+              console.log('Inicio');
+              this.navController.navigateRoot('home')
+            }
+          }, {
+            text: 'Solicitar otros documentos:',
+            id: 'confirm-button',
+            handler: () => {
+              
+            }
+          }
+        ]
+    });
+    await alert.present();
+    const { role } = await alert.onDidDismiss();
+    console.log('onDidDismiss resolved with role', role);
+  }
+
+
 
   onClickDownloadDoc(doc: IDocumento) {
 

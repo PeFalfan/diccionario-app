@@ -23,4 +23,9 @@ export class DocumentsService {
     let urlToHit = this.url + "/getDocuments?idLesson=" + id;
     return this.http.get<IDownloadDocumentResponseModel>(urlToHit)
   }
+
+  sendDocumentsByEmail(idLeccion:number, email:string):Observable<IResponseModel>{
+    let urlToHit = this.url + "/sendDocumentsBy?idLesson="+ idLeccion +"&email=" + email;
+    return this.http.get<IResponseModel>(urlToHit);
+  }
 }
