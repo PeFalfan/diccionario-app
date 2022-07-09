@@ -4,26 +4,37 @@
       <ion-buttons slot="start">
         <ion-back-button defaultHref="/"></ion-back-button>
       </ion-buttons>
-      <ion-title class="ion-text-center">Carga de archivos</ion-title>
+      <ion-title class="ion-text-center">Diccionario Rapa Nui</ion-title>
       <ion-img style="width: 30px; height: 30px;" slot="end" src="./assets/images/moai.png"></ion-img>
     </ion-item>
   </ion-toolbar>
   <ion-item class="arena">
-    <ion-title class="ion-text-center">Diccionario Rapa Nui</ion-title>
+    <ion-title class="ion-text-center">Carga de archivos</ion-title>
   </ion-item>
 </ion-header>
 
 <ion-content>
+
+  <ion-item>
+    <ion-label>Seleccione una lección</ion-label>
+    <ion-select [(ngModel)]="leccionSeleccionada">
+      <ion-select-option [value]="less" *ngFor="let less of lessons">{{less.tituloLeccion}}
+      </ion-select-option>
+    </ion-select>
+  </ion-item>
+  <br>
+  
   <br>
   <ion-item>
     <ion-label>Seleccione un archivo:</ion-label>
-    <ion-input type="file" [(ngModel)]="documento"></ion-input>
+    <ion-input type="file" (change)="toBase64($event)"></ion-input>
   </ion-item>
   <br>
-  <ion-item>
+
+  <!--<ion-item>
     <ion-textarea placeholder="Comentario:" class="document-text" [(ngModel)]="comentarioDocumento"></ion-textarea>
-  </ion-item>
-  <ion-button class="lesson_button" (click)='cancelarDocumento()'>Cancelar</ion-button>
-  <ion-button class="lesson_button" (click)="validarDocumento()">Enviar</ion-button>
+  </ion-item>-->
+  <ion-button class="lesson_button arena" (click)='cancelarDocumento()'>Cancelar</ion-button>
+  <ion-button class="lesson_button arena" (click)="validarDocumento()">Enviar</ion-button>
 
 </ion-content>

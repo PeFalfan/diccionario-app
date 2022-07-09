@@ -34,3 +34,15 @@ export interface IPregunta {
     textoPregunta: string,
     palabraDiccionario: string
 }
+
+export interface IStudentSummary {
+    studentName: string,
+    lessons: string,
+    percentage: string
+}
+
+export interface ILessonResume {
+    userId : number,
+    idLesson : number,
+    stateLesson: number
+}

@@ -1,23 +1,706 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>dictionary</ion-title>
+    <ion-item class="arena">
+      <ion-buttons slot="start">
+        <ion-menu-button autoHide="false"></ion-menu-button>
+      </ion-buttons>
+      <ion-title class="ion-text-center">Diccionario</ion-title>
+      <ion-img style="width: 30px; height: 30px;" slot="end" src="./assets/images/moai.png"></ion-img>
+    </ion-item>
   </ion-toolbar>
+
 </ion-header>
 
 <ion-content>
 
-  <ion-list>
-    <ion-item *ngFor="let termino of dictionary.terms">
-      <ion-avatar slot="start">
-        <img src="../../../assets/images/lesson.png" alt="diccionario" />
-      </ion-avatar>
-      <ion-label>
-        <h2>Termino: {{ termino.word }}</h2>
-        <h2>Significado: {{termino.traslation}}</h2>
-        <button *ngIf="termino.pronunciation != null" color="success" (click)="playAudio(termino.pronunciation)">play</button>
-      </ion-label>
-      
-    </ion-item>
+  <!-- Barra de búsqueda -->
+
+  <ion-searchbar animated="true" (ionChange)="searchBarChange($event)" showCancelButton="always"></ion-searchbar>
+
+  <!-- palabras filtradas -->
+
+  <ion-list *ngIf="searched == true">
+
+    <div class="container" *ngFor="let termino of filteredTerms">
+
+      <ion-item>
+
+        <ion-avatar slot="start">
+          <img src="../../../assets/images/diccionario.png" alt="diccionario" />
+        </ion-avatar>
+
+        <ion-label>
+          <h2>Termino: {{ termino.word }}</h2>
+          <h2>Significado: {{termino.traslation}}</h2>
+        </ion-label>
+
+        <ion-button *ngIf="termino.pronunciation != null" color="secondary"
+          (click)="playAudio(termino.pronunciation)">
+          <ion-icon name="volume-medium-outline" size="large"></ion-icon>
+        </ion-button>
+
+      </ion-item>
+
+    </div>
+
   </ion-list>
 
+  <!-- Agrupaciones de palabras -->
+
+  <ion-list *ngIf="searched == false">
+
+    <ion-item *ngIf="aTerms.length > 0">
+      <ion-label>A</ion-label>
+    </ion-item>
+    <div class="container" *ngFor="let termino of aTerms">
+
+      <ion-item>
+
+        <ion-avatar slot="start">
+          <img src="../../../assets/images/diccionario.png" alt="diccionario" />
+        </ion-avatar>
+
+        <ion-label>
+          <h2>Termino: {{ termino.word }}</h2>
+          <h2>Significado: {{termino.traslation}}</h2>
+        </ion-label>
+
+        <ion-button *ngIf="termino.pronunciation != null" color="secondary"
+          (click)="playAudio(termino.pronunciation)">
+          <ion-icon name="volume-medium-outline" size="large"></ion-icon>
+        </ion-button>
+
+      </ion-item>
+
+    </div>
+
+    <ion-item *ngIf="bTerms.length > 0">
+      <ion-label>B</ion-label>
+    </ion-item>
+    <div class="container" *ngFor="let termino of bTerms">
+      <ion-item>
+
+        <ion-avatar slot="start">
+          <img src="../../../assets/images/diccionario.png" alt="diccionario" />
+        </ion-avatar>
+
+        <ion-label>
+          <h2>Termino: {{ termino.word }}</h2>
+          <h2>Significado: {{termino.traslation}}</h2>
+        </ion-label>
+
+        <ion-button *ngIf="termino.pronunciation != null" color="secondary"
+          (click)="playAudio(termino.pronunciation)">
+          <ion-icon name="volume-medium-outline" size="large"></ion-icon>
+        </ion-button>
+
+      </ion-item>
+
+    </div>
+
+    <ion-item *ngIf="cTerms.length > 0">
+      <ion-label>C</ion-label>
+    </ion-item>
+    <div class="container" *ngFor="let termino of cTerms">
+
+      <ion-item>
+
+        <ion-avatar slot="start">
+          <img src="../../../assets/images/diccionario.png" alt="diccionario" />
+        </ion-avatar>
+
+        <ion-label>
+          <h2>Termino: {{ termino.word }}</h2>
+          <h2>Significado: {{termino.traslation}}</h2>
+        </ion-label>
+
+        <ion-button *ngIf="termino.pronunciation != null" color="secondary"
+          (click)="playAudio(termino.pronunciation)">
+          <ion-icon name="volume-medium-outline" size="large"></ion-icon>
+        </ion-button>
+
+      </ion-item>
+
+    </div>
+
+    <ion-item *ngIf="dTerms.length > 0">
+      <ion-label>D</ion-label>
+    </ion-item>
+    <div class="container" *ngFor="let termino of dTerms">
+
+      <ion-item>
+
+        <ion-avatar slot="start">
+          <img src="../../../assets/images/diccionario.png" alt="diccionario" />
+        </ion-avatar>
+
+        <ion-label>
+          <h2>Termino: {{ termino.word }}</h2>
+          <h2>Significado: {{termino.traslation}}</h2>
+        </ion-label>
+
+        <ion-button *ngIf="termino.pronunciation != null" color="secondary"
+          (click)="playAudio(termino.pronunciation)">
+          <ion-icon name="volume-medium-outline" size="large"></ion-icon>
+        </ion-button>
+
+      </ion-item>
+
+    </div>
+
+    <ion-item *ngIf="eTerms.length > 0">
+      <ion-label>E</ion-label>
+    </ion-item>
+    <div class="container" *ngFor="let termino of eTerms">
+
+      <ion-item>
+
+        <ion-avatar slot="start">
+          <img src="../../../assets/images/diccionario.png" alt="diccionario" />
+        </ion-avatar>
+
+        <ion-label>
+          <h2>Termino: {{ termino.word }}</h2>
+          <h2>Significado: {{termino.traslation}}</h2>
+        </ion-label>
+
+        <ion-button *ngIf="termino.pronunciation != null" color="secondary"
+          (click)="playAudio(termino.pronunciation)">
+          <ion-icon name="volume-medium-outline" size="large"></ion-icon>
+        </ion-button>
+
+      </ion-item>
+
+    </div>
+
+    <ion-item *ngIf="fTerms.length > 0">
+      <ion-label>F</ion-label>
+    </ion-item>
+    <div class="container" *ngFor="let termino of fTerms">
+
+      <ion-item>
+
+        <ion-avatar slot="start">
+          <img src="../../../assets/images/diccionario.png" alt="diccionario" />
+        </ion-avatar>
+
+        <ion-label>
+          <h2>Termino: {{ termino.word }}</h2>
+          <h2>Significado: {{termino.traslation}}</h2>
+        </ion-label>
+
+        <ion-button *ngIf="termino.pronunciation != null" color="secondary"
+          (click)="playAudio(termino.pronunciation)">
+          <ion-icon name="volume-medium-outline" size="large"></ion-icon>
+        </ion-button>
+
+      </ion-item>
+
+    </div>
+
+    <ion-item *ngIf="gTerms.length > 0">
+      <ion-label>G</ion-label>
+    </ion-item>
+    <div class="container" *ngFor="let termino of gTerms">
+
+      <ion-item>
+
+        <ion-avatar slot="start">
+          <img src="../../../assets/images/diccionario.png" alt="diccionario" />
+        </ion-avatar>
+
+        <ion-label>
+          <h2>Termino: {{ termino.word }}</h2>
+          <h2>Significado: {{termino.traslation}}</h2>
+        </ion-label>
+
+        <ion-button *ngIf="termino.pronunciation != null" color="secondary"
+          (click)="playAudio(termino.pronunciation)">
+          <ion-icon name="volume-medium-outline" size="large"></ion-icon>
+        </ion-button>
+
+      </ion-item>
+
+    </div>
+
+    <ion-item *ngIf="hTerms.length > 0">
+      <ion-label>H</ion-label>
+    </ion-item>
+    <div class="container" *ngFor="let termino of hTerms">
+
+      <ion-item>
+
+        <ion-avatar slot="start">
+          <img src="../../../assets/images/diccionario.png" alt="diccionario" />
+        </ion-avatar>
+
+        <ion-label>
+          <h2>Termino: {{ termino.word }}</h2>
+          <h2>Significado: {{termino.traslation}}</h2>
+        </ion-label>
+
+        <ion-button *ngIf="termino.pronunciation != null" color="secondary"
+          (click)="playAudio(termino.pronunciation)">
+          <ion-icon name="volume-medium-outline" size="large"></ion-icon>
+        </ion-button>
+
+      </ion-item>
+
+    </div>
+
+    <ion-item *ngIf="iTerms.length > 0">
+      <ion-label>I</ion-label>
+    </ion-item>
+    <div class="container" *ngFor="let termino of iTerms">
+
+      <ion-item>
+
+        <ion-avatar slot="start">
+          <img src="../../../assets/images/diccionario.png" alt="diccionario" />
+        </ion-avatar>
+
+        <ion-label>
+          <h2>Termino: {{ termino.word }}</h2>
+          <h2>Significado: {{termino.traslation}}</h2>
+        </ion-label>
+
+        <ion-button *ngIf="termino.pronunciation != null" color="secondary"
+          (click)="playAudio(termino.pronunciation)">
+          <ion-icon name="volume-medium-outline" size="large"></ion-icon>
+        </ion-button>
+
+      </ion-item>
+
+    </div>
+
+    <ion-item *ngIf="jTerms.length > 0">
+      <ion-label>J</ion-label>
+    </ion-item>
+    <div class="container" *ngFor="let termino of jTerms">
+
+      <ion-item>
+
+        <ion-avatar slot="start">
+          <img src="../../../assets/images/diccionario.png" alt="diccionario" />
+        </ion-avatar>
+
+        <ion-label>
+          <h2>Termino: {{ termino.word }}</h2>
+          <h2>Significado: {{termino.traslation}}</h2>
+        </ion-label>
+
+        <ion-button *ngIf="termino.pronunciation != null" color="secondary"
+          (click)="playAudio(termino.pronunciation)">
+          <ion-icon name="volume-medium-outline" size="large"></ion-icon>
+        </ion-button>
+
+      </ion-item>
+
+    </div>
+
+    <ion-item *ngIf="kTerms.length > 0">
+      <ion-label>K</ion-label>
+    </ion-item>
+    <div class="container" *ngFor="let termino of kTerms">
+
+      <ion-item>
+
+        <ion-avatar slot="start">
+          <img src="../../../assets/images/diccionario.png" alt="diccionario" />
+        </ion-avatar>
+
+        <ion-label>
+          <h2>Termino: {{ termino.word }}</h2>
+          <h2>Significado: {{termino.traslation}}</h2>
+        </ion-label>
+
+        <ion-button *ngIf="termino.pronunciation != null" color="secondary"
+          (click)="playAudio(termino.pronunciation)">
+          <ion-icon name="volume-medium-outline" size="large"></ion-icon>
+        </ion-button>
+
+      </ion-item>
+
+    </div>
+
+    <ion-item *ngIf="lTerms.length > 0">
+      <ion-label>L</ion-label>
+    </ion-item>
+    <div class="container" *ngFor="let termino of lTerms">
+
+      <ion-item>
+
+        <ion-avatar slot="start">
+          <img src="../../../assets/images/diccionario.png" alt="diccionario" />
+        </ion-avatar>
+
+        <ion-label>
+          <h2>Termino: {{ termino.word }}</h2>
+          <h2>Significado: {{termino.traslation}}</h2>
+        </ion-label>
+
+        <ion-button *ngIf="termino.pronunciation != null" color="secondary"
+          (click)="playAudio(termino.pronunciation)">
+          <ion-icon name="volume-medium-outline" size="large"></ion-icon>
+        </ion-button>
+
+      </ion-item>
+
+    </div>
+
+    <ion-item *ngIf="mTerms.length > 0">
+      <ion-label>M</ion-label>
+    </ion-item>
+    <div class="container" *ngFor="let termino of mTerms">
+
+      <ion-item>
+
+        <ion-avatar slot="start">
+          <img src="../../../assets/images/diccionario.png" alt="diccionario" />
+        </ion-avatar>
+
+        <ion-label>
+          <h2>Termino: {{ termino.word }}</h2>
+          <h2>Significado: {{termino.traslation}}</h2>
+        </ion-label>
+
+        <ion-button *ngIf="termino.pronunciation != null" color="secondary"
+          (click)="playAudio(termino.pronunciation)">
+          <ion-icon name="volume-medium-outline" size="large"></ion-icon>
+        </ion-button>
+
+      </ion-item>
+
+    </div>
+
+    <ion-item *ngIf="nTerms.length > 0">
+      <ion-label>N</ion-label>
+    </ion-item>
+    <div class="container" *ngFor="let termino of nTerms">
+
+      <ion-item>
+
+        <ion-avatar slot="start">
+          <img src="../../../assets/images/diccionario.png" alt="diccionario" />
+        </ion-avatar>
+
+        <ion-label>
+          <h2>Termino: {{ termino.word }}</h2>
+          <h2>Significado: {{termino.traslation}}</h2>
+        </ion-label>
+
+        <ion-button *ngIf="termino.pronunciation != null" color="secondary"
+          (click)="playAudio(termino.pronunciation)">
+          <ion-icon name="volume-medium-outline" size="large"></ion-icon>
+        </ion-button>
+
+      </ion-item>
+
+    </div>
+
+    <ion-item *ngIf="oTerms.length > 0">
+      <ion-label>O</ion-label>
+    </ion-item>
+    <div class="container" *ngFor="let termino of oTerms">
+
+      <ion-item>
+
+        <ion-avatar slot="start">
+          <img src="../../../assets/images/diccionario.png" alt="diccionario" />
+        </ion-avatar>
+
+        <ion-label>
+          <h2>Termino: {{ termino.word }}</h2>
+          <h2>Significado: {{termino.traslation}}</h2>
+        </ion-label>
+
+        <ion-button *ngIf="termino.pronunciation != null" color="secondary"
+          (click)="playAudio(termino.pronunciation)">
+          <ion-icon name="volume-medium-outline" size="large"></ion-icon>
+        </ion-button>
+
+      </ion-item>
+
+    </div>
+
+    <ion-item *ngIf="pTerms.length > 0">
+      <ion-label>P</ion-label>
+    </ion-item>
+    <div class="container" *ngFor="let termino of pTerms">
+
+      <ion-item>
+
+        <ion-avatar slot="start">
+          <img src="../../../assets/images/diccionario.png" alt="diccionario" />
+        </ion-avatar>
+
+        <ion-label>
+          <h2>Termino: {{ termino.word }}</h2>
+          <h2>Significado: {{termino.traslation}}</h2>
+        </ion-label>
+
+        <ion-button *ngIf="termino.pronunciation != null" color="secondary"
+          (click)="playAudio(termino.pronunciation)">
+          <ion-icon name="volume-medium-outline" size="large"></ion-icon>
+        </ion-button>
+
+      </ion-item>
+
+    </div>
+
+    <ion-item *ngIf="qTerms.length > 0">
+      <ion-label>Q</ion-label>
+    </ion-item>
+    <div class="container" *ngFor="let termino of qTerms">
+
+      <ion-item>
+
+        <ion-avatar slot="start">
+          <img src="../../../assets/images/diccionario.png" alt="diccionario" />
+        </ion-avatar>
+
+        <ion-label>
+          <h2>Termino: {{ termino.word }}</h2>
+          <h2>Significado: {{termino.traslation}}</h2>
+        </ion-label>
+
+        <ion-button *ngIf="termino.pronunciation != null" color="secondary"
+          (click)="playAudio(termino.pronunciation)">
+          <ion-icon name="volume-medium-outline" size="large"></ion-icon>
+        </ion-button>
+
+      </ion-item>
+
+    </div>
+
+    <ion-item *ngIf="rTerms.length > 0">
+      <ion-label>R</ion-label>
+    </ion-item>
+    <div class="container" *ngFor="let termino of rTerms">
+
+      <ion-item>
+
+        <ion-avatar slot="start">
+          <img src="../../../assets/images/diccionario.png" alt="diccionario" />
+        </ion-avatar>
+
+        <ion-label>
+          <h2>Termino: {{ termino.word }}</h2>
+          <h2>Significado: {{termino.traslation}}</h2>
+        </ion-label>
+
+        <ion-button *ngIf="termino.pronunciation != null" color="secondary"
+          (click)="playAudio(termino.pronunciation)">
+          <ion-icon name="volume-medium-outline" size="large"></ion-icon>
+        </ion-button>
+
+      </ion-item>
+
+    </div>
+
+    <ion-item *ngIf="sTerms.length > 0">
+      <ion-label>S</ion-label>
+    </ion-item>
+    <div class="container" *ngFor="let termino of sTerms">
+
+      <ion-item>
+
+        <ion-avatar slot="start">
+          <img src="../../../assets/images/diccionario.png" alt="diccionario" />
+        </ion-avatar>
+
+        <ion-label>
+          <h2>Termino: {{ termino.word }}</h2>
+          <h2>Significado: {{termino.traslation}}</h2>
+        </ion-label>
+
+        <ion-button *ngIf="termino.pronunciation != null" color="secondary"
+          (click)="playAudio(termino.pronunciation)">
+          <ion-icon name="volume-medium-outline" size="large"></ion-icon>
+        </ion-button>
+
+      </ion-item>
+
+    </div>
+
+    <ion-item *ngIf="tTerms.length > 0">
+      <ion-label>T</ion-label>
+    </ion-item>
+    <div class="container" *ngFor="let termino of tTerms">
+
+      <ion-item>
+
+        <ion-avatar slot="start">
+          <img src="../../../assets/images/diccionario.png" alt="diccionario" />
+        </ion-avatar>
+
+        <ion-label>
+          <h2>Termino: {{ termino.word }}</h2>
+          <h2>Significado: {{termino.traslation}}</h2>
+        </ion-label>
+
+        <ion-button *ngIf="termino.pronunciation != null" color="secondary"
+          (click)="playAudio(termino.pronunciation)">
+          <ion-icon name="volume-medium-outline" size="large"></ion-icon>
+        </ion-button>
+
+      </ion-item>
+
+    </div>
+
+    <ion-item *ngIf="uTerms.length > 0">
+      <ion-label>U</ion-label>
+    </ion-item>
+    <div class="container" *ngFor="let termino of uTerms">
+
+      <ion-item>
+
+        <ion-avatar slot="start">
+          <img src="../../../assets/images/diccionario.png" alt="diccionario" />
+        </ion-avatar>
+
+        <ion-label>
+          <h2>Termino: {{ termino.word }}</h2>
+          <h2>Significado: {{termino.traslation}}</h2>
+        </ion-label>
+
+        <ion-button *ngIf="termino.pronunciation != null" color="secondary"
+          (click)="playAudio(termino.pronunciation)">
+          <ion-icon name="volume-medium-outline" size="large"></ion-icon>
+        </ion-button>
+
+      </ion-item>
+
+    </div>
+
+    <ion-item *ngIf="vTerms.length > 0">
+      <ion-label>V</ion-label>
+    </ion-item>
+    <div class="container" *ngFor="let termino of vTerms">
+
+      <ion-item>
+
+        <ion-avatar slot="start">
+          <img src="../../../assets/images/diccionario.png" alt="diccionario" />
+        </ion-avatar>
+
+        <ion-label>
+          <h2>Termino: {{ termino.word }}</h2>
+          <h2>Significado: {{termino.traslation}}</h2>
+        </ion-label>
+
+        <ion-button *ngIf="termino.pronunciation != null" color="secondary"
+          (click)="playAudio(termino.pronunciation)">
+          <ion-icon name="volume-medium-outline" size="large"></ion-icon>
+        </ion-button>
+
+      </ion-item>
+
+    </div>
+
+    <ion-item *ngIf="wTerms.length > 0">
+      <ion-label>W</ion-label>
+    </ion-item>
+    <div class="container" *ngFor="let termino of wTerms">
+
+      <ion-item>
+
+        <ion-avatar slot="start">
+          <img src="../../../assets/images/diccionario.png" alt="diccionario" />
+        </ion-avatar>
+
+        <ion-label>
+          <h2>Termino: {{ termino.word }}</h2>
+          <h2>Significado: {{termino.traslation}}</h2>
+        </ion-label>
+
+        <ion-button *ngIf="termino.pronunciation != null" color="secondary"
+          (click)="playAudio(termino.pronunciation)">
+          <ion-icon name="volume-medium-outline" size="large"></ion-icon>
+        </ion-button>
+
+      </ion-item>
+
+    </div>
+
+    <ion-item *ngIf="xTerms.length > 0">
+      <ion-label>X</ion-label>
+    </ion-item>
+    <div class="container" *ngFor="let termino of xTerms">
+
+      <ion-item>
+
+        <ion-avatar slot="start">
+          <img src="../../../assets/images/diccionario.png" alt="diccionario" />
+        </ion-avatar>
+
+        <ion-label>
+          <h2>Termino: {{ termino.word }}</h2>
+          <h2>Significado: {{termino.traslation}}</h2>
+        </ion-label>
+
+        <ion-button *ngIf="termino.pronunciation != null" color="secondary"
+          (click)="playAudio(termino.pronunciation)">
+          <ion-icon name="volume-medium-outline" size="large"></ion-icon>
+        </ion-button>
+
+      </ion-item>
+
+    </div>
+
+    <ion-item *ngIf="yTerms.length > 0">
+      <ion-label>Y</ion-label>
+    </ion-item>
+    <div class="container" *ngFor="let termino of yTerms">
+
+      <ion-item>
+
+        <ion-avatar slot="start">
+          <img src="../../../assets/images/diccionario.png" alt="diccionario" />
+        </ion-avatar>
+
+        <ion-label>
+          <h2>Termino: {{ termino.word }}</h2>
+          <h2>Significado: {{termino.traslation}}</h2>
+        </ion-label>
+
+        <ion-button *ngIf="termino.pronunciation != null" color="secondary"
+          (click)="playAudio(termino.pronunciation)">
+          <ion-icon name="volume-medium-outline" size="large"></ion-icon>
+        </ion-button>
+
+      </ion-item>
+
+    </div>
+
+    <ion-item *ngIf="zTerms.length > 0">
+      <ion-label>Z</ion-label>
+    </ion-item>
+    <div class="container" *ngFor="let termino of zTerms">
+
+      <ion-item>
+
+        <ion-avatar slot="start">
+          <img src="../../../assets/images/diccionario.png" alt="diccionario" />
+        </ion-avatar>
+
+        <ion-label>
+          <h2>Termino: {{ termino.word }}</h2>
+          <h2>Significado: {{termino.traslation}}</h2>
+        </ion-label>
+
+        <ion-button *ngIf="termino.pronunciation != null" color="secondary"
+          (click)="playAudio(termino.pronunciation)">
+          <ion-icon name="volume-medium-outline" size="large"></ion-icon>
+        </ion-button>
+
+      </ion-item>
+
+    </div>
+
+
+  </ion-list>
+  <br>
+  <br>
+  <br>
 </ion-content>

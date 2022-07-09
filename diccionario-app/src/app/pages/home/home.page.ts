@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { NavController } from '@ionic/angular';
 import { IUser } from 'src/app/interfaces/user-interfaces';
 import { DatabaseService } from 'src/app/services/database/database.service';
 
@@ -9,6 +10,12 @@ import { DatabaseService } from 'src/app/services/database/database.service';
   styleUrls: ['./home.page.scss'],
 })
 export class HomePage implements OnInit {
+
+  slideOpts = {
+    initialSlide: 1,
+    speed: 400, 
+    autoplay: true
+  };
 
   inSessionUser: IUser = {
     clientName: '',
@@ -37,9 +44,9 @@ export class HomePage implements OnInit {
     "⠨⡂⡀⢑⢕⡅⠂⠄⠉⠛⠻⠿⢿⣿⣿⣿⣿⣿⣿⣿⣿⡿⢋⢔⢕⢕⣿⣿⠠⠈\n" +
     "⠄⠪⣂⠁⢕⠆⠄⠂⠄⠁⡀⠂⡀⠄⢈⠉⢍⢛⢛⢛⢋⢔⢕⢕⢕⣽⣿⣿⠠⠈\n"
 
-  control: string = "Control";
+ 
 
-  constructor(private rutaActiva: ActivatedRoute,
+  constructor(private navCtrl: NavController,
     private dbService: DatabaseService) {
   }
 
@@ -81,13 +88,7 @@ export class HomePage implements OnInit {
   cerrarSesion() {
 
     this.dbService.clearSession();
-    this.volverLogin();
-
-  }
-
-  volverLogin() {
-
-    window.location.assign('/log-in')
+    this.navCtrl.navigateRoot('/log-in')
 
   }
 
